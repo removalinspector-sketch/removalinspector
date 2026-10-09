@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Disallow: /kits/*.zip
+Disallow: /private/
+
+# Sitemap
+Sitemap: https://removalinspector.co.za/sitemap.xml
+
+# Crawl delay
+Crawl-delay: 1
+
+# Host
+Host: https://removalinspector.co.za
