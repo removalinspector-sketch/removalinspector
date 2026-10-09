@@ -1,0 +1,2 @@
+/kits/* /kits/:splat 200
+/download/* /download.html?kit=:splat 200
