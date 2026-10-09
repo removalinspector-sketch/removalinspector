@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en-ZA"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Download — Removal Inspector</title>
+<script src="https://cdn.tailwindcss.com"></script></head>
+<body class="bg-[#F8FAFC] p-8">
+<div class="max-w-[720px] mx-auto bg-white rounded-[20px] p-8 border shadow">
+<h1 class="text-[24px] font-bold">Thank you — Payment Received</h1>
+<p class="mt-2 text-[13px] text-slate-500">Your PayFast payment was successful. Your download is ready. Link expires 48h, re-send within 7 days via support@removalinspector.co.za</p>
+<div id="kit-info" class="mt-6 rounded-[14px] bg-[#0A1028] text-white p-5"></div>
+<a href="#" id="dl-btn" class="mt-6 inline-flex h-12 px-8 items-center justify-center rounded-full bg-[#00E38A] text-[#0A1028] font-bold">Download ZIP</a>
+<p class="mt-4 text-[11px] text-slate-500">Educational only. Form 19 only from DC/court. Bureaus decide per Sec71(5). No guarantee. Support via WhatsApp 075 793 1848</p>
+</div>
+<script>
+const kits = {starter:"RI-Starter-R297-Kit.zip", prescribed:"RI-Prescribed-R347-Kit.zip", adverse:"RI-Adverse-R397-Kit.zip", "debt-review":"RI-DebtReview-R497-Kit.zip", judgement:"RI-Judgment-R547-Kit.zip", ultimate:"ULTIMATE_BUNDLE_R597_KIT6.zip"};
+const params = new URLSearchParams(location.search);
+const kit = params.get("kit")||"ultimate";
+document.getElementById("kit-info").textContent = "Kit: "+kit+" → "+(kits[kit]||kits.ultimate);
+document.getElementById("dl-btn").textContent = "Download "+(kits[kit]||kits.ultimate);
+</script>
+</body></html>
