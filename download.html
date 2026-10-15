@@ -1,20 +1,36 @@
-<!DOCTYPE html>
-<html lang="en-ZA"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Download — Removal Inspector</title>
-<script src="https://cdn.tailwindcss.com"></script></head>
-<body class="bg-[#F8FAFC] p-8">
-<div class="max-w-[720px] mx-auto bg-white rounded-[20px] p-8 border shadow">
-<h1 class="text-[24px] font-bold">Thank you — Payment Received</h1>
-<p class="mt-2 text-[13px] text-slate-500">Your PayFast payment was successful. Your download is ready. Link expires 48h, re-send within 7 days via support@removalinspector.co.za</p>
-<div id="kit-info" class="mt-6 rounded-[14px] bg-[#0A1028] text-white p-5"></div>
-<a href="#" id="dl-btn" class="mt-6 inline-flex h-12 px-8 items-center justify-center rounded-full bg-[#00E38A] text-[#0A1028] font-bold">Download ZIP</a>
-<p class="mt-4 text-[11px] text-slate-500">Educational only. Form 19 only from DC/court. Bureaus decide per Sec71(5). No guarantee. Support via WhatsApp 075 793 1848</p>
-</div>
+<!doctype html>
+<html lang="en-ZA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Digital Kit Delivery Support | Removal Inspector</title>
+<meta name="description" content="Need help receiving your Removal Inspector digital kit? Send your PayFast payment reference to support for manual confirmation and delivery assistance.">
+<link rel="canonical" href="https://removalinspector.co.za/download.html">
+<meta name="robots" content="noindex,follow">
+<style>
+:root{color-scheme:light}*{box-sizing:border-box}body{margin:0;background:#f3f6fb;color:#172033;font:16px/1.6 system-ui,-apple-system,Segoe UI,sans-serif;padding:24px}.card{max-width:680px;margin:6vh auto;background:#fff;border:1px solid #dfe5ef;border-radius:20px;padding:clamp(24px,5vw,42px);box-shadow:0 16px 45px #15233a12}h1{line-height:1.15;font-size:clamp(28px,5vw,38px);margin:0 0 16px}p{color:#536077}.notice{background:#fff7e8;border:1px solid #f4d69b;border-radius:12px;padding:14px;color:#634814;margin:20px 0}.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 20px;border-radius:999px;background:#087f58;color:#fff;text-decoration:none;font-weight:700;margin:8px 8px 0 0}.secondary{background:#edf2f8;color:#172033}.small{font-size:13px;color:#69758b}code{overflow-wrap:anywhere}
+</style>
+</head>
+<body><main class="card">
+<p><strong>REMOVAL INSPECTOR · DIGITAL KIT SUPPORT</strong></p>
+<h1>Let’s confirm your payment and arrange delivery</h1>
+<p>This page does not automatically verify PayFast payments or unlock files. Please send your payment reference to support so the payment can be checked and the correct kit can be delivered.</p>
+<div class="notice"><strong>Important:</strong> Do not send your password, full card details, or identity document over WhatsApp. A PayFast payment reference and the product purchased should be enough to start the enquiry.</div>
+<p id="purchase-details">Product details were not provided in the link. Include the product name and amount in your message.</p>
+<a class="btn" id="wa-link" href="https://wa.me/27757931848" target="_blank" rel="noopener">Contact WhatsApp support</a>
+<a class="btn secondary" href="mailto:support@removalinspector.co.za">Email support</a>
+<p class="small">Educational templates only. Removal Inspector does not guarantee credit-record changes and does not provide legal representation. If you have already paid, keep your PayFast confirmation for your records.</p>
+</main>
 <script>
-const kits = {starter:"RI-Starter-R297-Kit.zip", prescribed:"RI-Prescribed-R347-Kit.zip", adverse:"RI-Adverse-R397-Kit.zip", "debt-review":"RI-DebtReview-R497-Kit.zip", judgement:"RI-Judgment-R547-Kit.zip", ultimate:"ULTIMATE_BUNDLE_R597_KIT6.zip"};
-const params = new URLSearchParams(location.search);
-const kit = params.get("kit")||"ultimate";
-document.getElementById("kit-info").textContent = "Kit: "+kit+" → "+(kits[kit]||kits.ultimate);
-document.getElementById("dl-btn").textContent = "Download "+(kits[kit]||kits.ultimate);
+const q=new URLSearchParams(location.search);
+const kit=q.get("kit");
+const ref=q.get("ref");
+const labels={"starter":"Listing Clarity Starter (R297)","prescribed":"Collections & Prescription Path (R347)","adverse":"Arrears Correction Kit (R397)","debt-review":"Debt Review Exit Edu (R497)","judgement":"Judgement Review Pathway (R547)","ultimate":"Full Shield Bundle (R597)"};
+const details=[];
+if(kit) details.push("Product: "+(labels[kit]||kit));
+if(ref) details.push("PayFast reference: "+ref);
+if(details.length) document.getElementById("purchase-details").textContent=details.join(" · ");
+const msg="Hello Removal Inspector. Please confirm my PayFast payment and arrange delivery."+(kit?" Product: "+(labels[kit]||kit)+".":"")+(ref?" PayFast reference: "+ref+".":"");
+document.getElementById("wa-link").href="https://wa.me/27757931848?text="+encodeURIComponent(msg);
 </script>
 </body></html>
