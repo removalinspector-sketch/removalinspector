@@ -713,22 +713,12 @@ footer{border-top:1px solid var(--border);padding:56px 0 32px;background:rgba(0,
         <div class="order-kit" id="orderKitName">Listing Clarity Starter</div>
         <div class="order-sub" id="orderKitSub">Delivery support · R297</div>
         <div class="zip-box">
-          <div class="zip-row"><span class="zip-name"><i data-lucide="file-archive" style="width:16px;height:16px"></i><span id="zipName">RI-ListingClarity-R297-Kit.zip</span></span><span class="zip-size" id="zipSize">4.2 MB · ZIP</span></div>
-          <div class="zip-meta">
-            <div class="m"><div class="k">SHA256</div><div class="v">e7f8a9b8c1d2e3f4…</div></div>
-            <div class="m"><div class="k">Scanned</div><div class="v">No executables</div></div>
-            <div class="m"><div class="k">Expires</div><div class="v">48h · re-send 7d</div></div>
-          </div>
-          <a class="btn btn-primary dl-btn" href="https://wa.me/27757931848?text=Hello%20Removal%20Inspector.%20Please%20confirm%20my%20payment%20and%20deliver%20my%20digital%20kit." target="_blank" rel="noopener"><i data-lucide="message-circle" style="width:17px;height:17px"></i>Confirm payment &amp; request delivery</a>
-          <div class="order-note">Downloads are not automatically unlocked by this page. Contact support with your PayFast reference to confirm payment and arrange delivery.<br>Durban HQ · SA<br>Mon-Fri 9-5 SAST</div>
-        </div>
-        <div class="order-cols">
-          <div><h4>How to use · 15 min</h4><ol class="use-list"><li>Open 00_README_START_HERE.pdf</li><li>Complete evidence checklist (mask ID to last 3 digits)</li><li>Use dispute letter templates Sec 72</li><li>Upload via bureau portals (contacts in kit)</li><li>Log in tracker · 20 business days Sec 71(5)/Sec 72</li></ol></div>
-          <div><h4>Portal · Tracker</h4><div class="tracker-box"><div class="tracker-days"><span>Day 0 → Day 20</span><span>Sec 72 countdown</span></div><div class="tracker-bar"><span></span></div><div style="font-size:10px;color:var(--faint);line-height:1.6">Day 3: Check acknowledgement · Day 10: Follow-up template · Day 20: Escalate if no response</div></div><div class="tracker-files"><span>Reminder_03.docx</span><span>Escalation_20.docx</span><span>Outcome_Log.xlsx</span></div></div>
+          <div class="zip-row"><span class="zip-name"><i data-lucide="package" style="width:16px;height:16px"></i><span id="zipName">Delivery arranged after payment confirmation</span></span><span class="zip-size" id="zipSize">R297</span></div>
+          <div class="order-note">This website does not currently deliver a ZIP automatically or verify PayFast payments online. After paying, contact support with your payment reference so the purchase can be checked and the correct kit delivered. Do not send passwords or full card details.<br><br><a href="https://wa.me/27757931848" target="_blank" rel="noopener">WhatsApp support</a> · <a href="mailto:support@removalinspector.co.za">Email support</a></div>
         </div>
         <div class="compliance"><i data-lucide="alert-triangle" style="width:16px;height:16px"></i><span><b style="color:var(--text)">Compliance:</b> Adverse information (historically called blacklisting) — dispute inaccurate flag. Form 19 only issued by your registered debt counsellor or court. Judgement requires rescission/consent. Info only. We do not issue Form 19, do not lodge on your behalf, do not guarantee outcome. Bureaus decide. Educational only, not legal advice. POPIA safe.</span></div>
         <div class="support-row"><a href="https://wa.me/27757931848" class="btn btn-ghost" target="_blank" rel="noopener"><i data-lucide="message-circle" style="width:15px;height:15px"></i>WhatsApp Support</a><a href="mailto:support@removalinspector.co.za" class="btn btn-ghost"><i data-lucide="mail" style="width:15px;height:15px"></i>support@removalinspector.co.za</a></div>
-        <div class="files-zip"><h4>Files in this ZIP</h4><div class="file-tags" id="fileTags"><span><i data-lucide="file-text"></i>00_README_START_HERE.pdf</span><span><i data-lucide="file-spreadsheet"></i>01_Profile_Decode.pdf</span><span><i data-lucide="file-text"></i>02_Listing_Type_Map.pdf</span><span><i data-lucide="file-check"></i>03_Evidence_Checklist.pdf</span><span><i data-lucide="file-text"></i>04_Dispute_Letters_Sec72.docx</span><span><i data-lucide="file-spreadsheet"></i>05_Tracker_20day.xlsx</span><span><i data-lucide="mail"></i>06_Bureau_Contacts.pdf</span><span><i data-lucide="file-text"></i>07_Sec71_5_Explained.pdf</span></div></div>
+        <div class="files-zip"><h4>Delivery status</h4><p>Digital delivery is arranged after manual payment confirmation. We do not claim that an instant-download system is active until payment verification and file delivery are implemented.</p></div>
       </div>
     </div>
   </div>
@@ -911,20 +901,14 @@ footer{border-top:1px solid var(--border);padding:56px 0 32px;background:rgba(0,
   // ---------- Delivery kit selector ----------
   var kitOpts = document.querySelectorAll('.kit-opt');
   function setOrderKit(kitId){
-    // Update PayFast buy button in delivery section if exists
     var k = KITS[kitId];
-    var buyBtn = document.getElementById('orderBuyBtn');
-    if(buyBtn && k){
-      buyBtn.href = k.payfast;
-      buyBtn.textContent = 'Buy '+k.price+' — PayFast Secure';
-    }
-
-    var k = KITS[kitId];
+    if(!k) return;
     document.getElementById('orderKitName').textContent = k.name;
-    document.getElementById('orderKitSub').textContent = 'Instant delivery · ZIP ready · ' + k.price;
-    document.getElementById('zipName').textContent = k.zip;
-    document.getElementById('dlName').textContent = k.zip;
-    document.getElementById('zipSize').textContent = k.size;
+    document.getElementById('orderKitSub').textContent = 'Selected educational kit · ' + k.price;
+    var zipName = document.getElementById('zipName');
+    var zipSize = document.getElementById('zipSize');
+    if(zipName) zipName.textContent = 'Delivery arranged after payment confirmation';
+    if(zipSize) zipSize.textContent = k.price;
   }
   kitOpts.forEach(function(opt){
     opt.addEventListener('click', function(){
