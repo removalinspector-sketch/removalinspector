@@ -14,7 +14,7 @@ const json = (data, status = 200) => new Response(JSON.stringify(data), {
 function b64url(bytes) {
   let binary = "";
   for (const b of bytes) binary += String.fromCharCode(b);
-  return btoa(binary).replace(/=/g, "").replace(/\\+/g, "-").replace(/\\//g, "_");
+  return btoa(binary).replace(/=/g, "").replaceAll("+", "-").replaceAll("/", "_");
 }
 function unb64url(s) {
   s = s.replace(/-/g, "+").replace(/_/g, "/");
