@@ -6,7 +6,7 @@ workers_dev = true
 [[d1_databases]]
 binding = "DB"
 database_name = "removal-inspector-delivery"
-database_id = "REPLACE_WITH_D1_DATABASE_ID"
+database_id = "beb02757-e335-4594-9bf5-4d88f3bf5a44"
 
 [[r2_buckets]]
 binding = "KITS_BUCKET"
