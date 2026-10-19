@@ -1,12 +1,12 @@
 # Removal Inspector — secure PayFast digital delivery
 
 ## Current setup status (19 October 2026)
-- Created private Cloudflare R2 bucket: `removal-inspector-private-kits`. Public access/custom domain must remain disabled.
-- Created D1 database: `removal-inspector-delivery` (ID: `beb02757-e335-4594-9bf5-4d88f3bf5a44`).
-- Applied `schema.sql` to the D1 database.
-- Generated six customer product ZIPs from the supplied Ultimate Bundle HTML. They are not committed to this public repository; upload the six ZIPs to the private R2 bucket before taking live payments.
-- Production email/PayFast secrets, Worker deployment, route and PayFast ITN settings still need configuration. Do not advertise instant delivery until a live test succeeds.
-
+- Private Cloudflare R2 bucket `removal-inspector-private-kits` exists; public access remains disabled.
+- D1 database `removal-inspector-delivery` exists (ID: `beb02757-e335-4594-9bf5-4d88f3bf5a44`) and the `payments` table is present.
+- Cloudflare Worker `removal-inspector-delivery` has been deployed with D1 and private R2 bindings and the merchant ID secret.
+- Six educational ZIPs have been uploaded to private R2 under the product keys listed below. These are initial text-based self-help packs; review them for completeness and accuracy before advertising them as comprehensive legal/document kits.
+- The Worker does not yet have a configured email-provider API key or verified sender. PayFast ITN settings and the production `/api/*` route have not been verified end-to-end.
+- **Automatic delivery is not live.** Keep the customer-facing page clear that support manually confirms payment and arranges delivery until email credentials, ITN settings, routing and all end-to-end tests are complete.
 ## What was found in the old delivery flow
 The older ITN example skips PayFast signature/ITN validation, defaults unrecognised payments to the R597 bundle, and contains a TODO instead of sending email. The previous browser-storage download flow is not payment verification. Do not deploy `payfast-itn-worker_1.js` or unlock files from `?paid=1`.
 
