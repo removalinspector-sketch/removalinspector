@@ -3,34 +3,58 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Digital Kit Delivery Support | Removal Inspector</title>
-<meta name="description" content="Need help receiving your Removal Inspector digital kit? Send your PayFast payment reference to support for manual confirmation and delivery assistance.">
+<title>Secure Digital Kit Download | Removal Inspector</title>
+<meta name="description" content="Verify your PayFast payment to securely download your Removal Inspector educational kit.">
 <link rel="canonical" href="https://removalinspector.co.za/download.html">
 <meta name="robots" content="noindex,follow">
 <style>
-:root{color-scheme:light}*{box-sizing:border-box}body{margin:0;background:#f3f6fb;color:#172033;font:16px/1.6 system-ui,-apple-system,Segoe UI,sans-serif;padding:24px}.card{max-width:680px;margin:6vh auto;background:#fff;border:1px solid #dfe5ef;border-radius:20px;padding:clamp(24px,5vw,42px);box-shadow:0 16px 45px #15233a12}h1{line-height:1.15;font-size:clamp(28px,5vw,38px);margin:0 0 16px}p{color:#536077}.notice{background:#fff7e8;border:1px solid #f4d69b;border-radius:12px;padding:14px;color:#634814;margin:20px 0}.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 20px;border-radius:999px;background:#087f58;color:#fff;text-decoration:none;font-weight:700;margin:8px 8px 0 0}.secondary{background:#edf2f8;color:#172033}.small{font-size:13px;color:#69758b}code{overflow-wrap:anywhere}
+:root{color-scheme:light}*{box-sizing:border-box}body{margin:0;background:#f3f6fb;color:#172033;font:16px/1.6 system-ui,-apple-system,Segoe UI,sans-serif;padding:24px}.card{max-width:680px;margin:6vh auto;background:#fff;border:1px solid #dfe5ef;border-radius:20px;padding:clamp(24px,5vw,42px);box-shadow:0 16px 45px #15233a12}h1{line-height:1.15;font-size:clamp(28px,5vw,38px);margin:0 0 16px}p{color:#536077}.notice{background:#eef8f3;border:1px solid #b9e4ce;border-radius:12px;padding:14px;color:#17583c;margin:20px 0}.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 20px;border-radius:999px;background:#087f58;color:#fff;text-decoration:none;font-weight:700;margin:8px 8px 0 0;border:0;cursor:pointer;font:inherit}.secondary{background:#edf2f8;color:#172033}.field{display:block;width:100%;padding:14px;border:1px solid #cbd5e1;border-radius:10px;font:inherit;margin:10px 0 14px}.small{font-size:13px;color:#69758b}#status{white-space:pre-wrap;overflow-wrap:anywhere}button:disabled{opacity:.6;cursor:wait}
 </style>
 </head>
 <body><main class="card">
-<p><strong>REMOVAL INSPECTOR · DIGITAL KIT SUPPORT</strong></p>
-<h1>Let’s confirm your payment and arrange delivery</h1>
-<p>This page does not automatically verify PayFast payments or unlock files. Please send your payment reference to support so the payment can be checked and the correct kit can be delivered.</p>
-<div class="notice"><strong>Important:</strong> Do not send your password, full card details, or identity document over WhatsApp. A PayFast payment reference and the product purchased should be enough to start the enquiry.</div>
-<p id="purchase-details">Product details were not provided in the link. Include the product name and amount in your message.</p>
-<a class="btn" id="wa-link" href="https://wa.me/27757931848" target="_blank" rel="noopener">Contact WhatsApp support</a>
+<p><strong>REMOVAL INSPECTOR · SECURE DIGITAL DELIVERY</strong></p>
+<h1>Verify your payment and download your kit</h1>
+<p>After PayFast confirms your payment, this page unlocks the correct educational kit. A redirect or payment reference alone is not proof of payment.</p>
+<div class="notice" id="notice">Enter the PayFast payment ID from your payment confirmation. If you have just paid, allow a short time for PayFast's server confirmation to arrive.</div>
+<label for="pfid"><strong>PayFast payment ID</strong></label>
+<input class="field" id="pfid" autocomplete="off" inputmode="numeric" placeholder="Enter payment ID (not your card details)">
+<button class="btn" id="verify">Verify payment</button>
+<p id="status" role="status" aria-live="polite"></p>
+<div id="download"></div>
 <a class="btn secondary" href="mailto:support@removalinspector.co.za">Email support</a>
-<p class="small">Educational templates only. Removal Inspector does not guarantee credit-record changes and does not provide legal representation. If you have already paid, keep your PayFast confirmation for your records.</p>
+<a class="btn secondary" href="https://wa.me/27757931848">WhatsApp support</a>
+<p class="small">Download links expire after 48 hours. If delivery fails after a verified payment, email support@removalinspector.co.za with your PayFast payment ID. Never send your password, full card details, or identity document over WhatsApp.</p>
+<p class="small">Educational templates only. No guaranteed credit-record changes or legal representation.</p>
 </main>
 <script>
-const q=new URLSearchParams(location.search);
-const kit=q.get("kit");
-const ref=q.get("ref");
-const labels={"starter":"Listing Clarity Starter (R297)","prescribed":"Collections & Prescription Path (R347)","adverse":"Arrears Correction Kit (R397)","debt-review":"Debt Review Exit Edu (R497)","judgement":"Judgement Review Pathway (R547)","ultimate":"Full Shield Bundle (R597)"};
-const details=[];
-if(kit) details.push("Product: "+(labels[kit]||kit));
-if(ref) details.push("PayFast reference: "+ref);
-if(details.length) document.getElementById("purchase-details").textContent=details.join(" · ");
-const msg="Hello Removal Inspector. Please confirm my PayFast payment and arrange delivery."+(kit?" Product: "+(labels[kit]||kit)+".":"")+(ref?" PayFast reference: "+ref+".":"");
-document.getElementById("wa-link").href="https://wa.me/27757931848?text="+encodeURIComponent(msg);
+const API = "https://ri-payment-delivery.removalinspector.workers.dev";
+const params = new URLSearchParams(location.search);
+const id = params.get("pf_payment_id") || params.get("payment_id");
+if (id) document.getElementById("pfid").value = id;
+const button = document.getElementById("verify");
+const status = document.getElementById("status");
+const download = document.getElementById("download");
+async function verify() {
+  const paymentId = document.getElementById("pfid").value.trim();
+  download.replaceChildren();
+  if (!/^[0-9]{4,40}$/.test(paymentId)) { status.textContent = "Enter the numeric PayFast payment ID from your payment confirmation."; return; }
+  button.disabled = true; status.textContent = "Checking PayFast confirmation…";
+  try {
+    const response = await fetch(API + "/api/payment-status?pf_payment_id=" + encodeURIComponent(paymentId), {cache:"no-store"});
+    const data = await response.json();
+    if (data.status === "verified" && data.download_url) {
+      status.textContent = "Payment verified for " + data.product + " (R" + data.amount + "). Your secure link is valid for 48 hours.";
+      const a = document.createElement("a"); a.className = "btn"; a.href = API + data.download_url; a.textContent = "Download my kit";
+      download.appendChild(a);
+    } else if (data.status === "pending") {
+      status.textContent = data.message || "Payment is not verified yet. Wait 30 seconds and try again.";
+    } else {
+      status.textContent = data.message || "Payment could not be verified. Check the ID and try again.";
+    }
+  } catch (e) { status.textContent = "The verification service is temporarily unavailable. Please try again or contact support."; }
+  finally { button.disabled = false; }
+}
+button.addEventListener("click", verify);
+if (id) verify();
 </script>
 </body></html>
