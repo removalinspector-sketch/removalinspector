@@ -15,10 +15,10 @@ The older ITN example skips PayFast signature/ITN validation, defaults unrecogni
 |---:|---|---|---|
 | R297 | Starter Kit | `kits/starter.zip` | https://payf.st/nkq21 |
 | R347 | Prescribed Debt Kit | `kits/prescribed.zip` | https://payf.st/wruhd |
-| R397 | Adverse Information Kit | `kits/adverse.zip` | https://payf.st/obtch |
-| R497 | Complete DIY Kit | `kits/complete.zip` | https://payf.st/xcztv |
-| R547 | Judgment Kit | `kits/judgment.zip` | https://payf.st/sq6ow |
-| R597 | Ultimate Bundle | `kits/ultimate.zip` | https://payf.st/rwxl4 |
+| R397 | Arrears Correction Educational Kit | `kits/adverse.zip` | https://payf.st/obtch |
+| R497 | Debt Review Exit Educational Kit | `kits/complete.zip` | https://payf.st/xcztv |
+| R547 | Judgement Review Pathway | `kits/judgment.zip` | https://payf.st/sq6ow |
+| R597 | Complete DIY Bundle | `kits/ultimate.zip` | https://payf.st/rwxl4 |
 
 The backend uses the verified gross payment amount as its product key because PayFast payment links may not expose custom fields. Each amount is unique. If prices or payment links change, update `PRODUCT_MAP` and test every product. The Worker rejects unknown amounts; it must never default an unknown payment to the Ultimate Bundle.
 
