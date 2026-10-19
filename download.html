@@ -13,10 +13,10 @@
 </head>
 <body><main class="card">
 <p><strong>REMOVAL INSPECTOR · DIGITAL KIT SUPPORT</strong></p>
-<h1>Let’s confirm your payment and arrange delivery</h1>
-<p>This page does not automatically verify PayFast payments or unlock files. Please send your payment reference to support so the payment can be checked and the correct kit can be delivered.</p>
+<h1>Payment confirmation and digital delivery support</h1>
+<p>Automated delivery is being prepared but is not yet available. This page does not verify PayFast payments or unlock files. Please send your PayFast payment reference to support so the payment can be checked and the correct kit can be delivered manually.</p>
 <div class="notice"><strong>Important:</strong> Do not send your password, full card details, or identity document over WhatsApp. A PayFast payment reference and the product purchased should be enough to start the enquiry.</div>
-<p id="purchase-details">Product details were not provided in the link. Include the product name and amount in your message.</p>
+<p id="purchase-details">Include the product name, amount and PayFast payment reference in your message. Do not send card details, passwords or identity documents.</p>
 <a class="btn" id="wa-link" href="https://wa.me/27757931848" target="_blank" rel="noopener">Contact WhatsApp support</a>
 <a class="btn secondary" href="mailto:support@removalinspector.co.za">Email support</a>
 <p class="small">Educational templates only. Removal Inspector does not guarantee credit-record changes and does not provide legal representation. If you have already paid, keep your PayFast confirmation for your records.</p>
@@ -25,7 +25,7 @@
 const q=new URLSearchParams(location.search);
 const kit=q.get("kit");
 const ref=q.get("ref");
-const labels={"starter":"Listing Clarity Starter (R297)","prescribed":"Collections & Prescription Path (R347)","adverse":"Arrears Correction Kit (R397)","debt-review":"Debt Review Exit Edu (R497)","judgement":"Judgement Review Pathway (R547)","ultimate":"Full Shield Bundle (R597)"};
+const labels={"starter":"Listing Clarity Starter (R297)","prescribed":"Collections & Prescription Path (R347)","adverse":"Arrears Correction Educational Kit (R397)","debt-review":"Debt Review Exit Educational Kit (R497)","judgement":"Judgement Review Pathway (R547)","ultimate":"Complete DIY Bundle (R597)"};
 const details=[];
 if(kit) details.push("Product: "+(labels[kit]||kit));
 if(ref) details.push("PayFast reference: "+ref);
