@@ -1,0 +1,22 @@
+name = "removal-inspector-delivery"
+main = "payfast-delivery-worker.js"
+compatibility_date = "2026-10-19"
+workers_dev = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "removal-inspector-delivery"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+
+[[r2_buckets]]
+binding = "KITS_BUCKET"
+bucket_name = "removal-inspector-private-kits"
+
+[vars]
+PUBLIC_ORIGIN = "https://removalinspector.co.za"
+PAYFAST_MODE = "live"
+# Set secrets separately; never commit secrets:
+# PAYFAST_MERCHANT_ID
+# PAYFAST_PASSPHRASE
+# RESEND_API_KEY
+# DELIVERY_FROM
