@@ -14,12 +14,12 @@
  */
 
 const PRODUCT_MAP = {
-  "297.00": { id: "starter", name: "Starter Kit", key: "kits/starter.zip", amount: 297 },
-  "347.00": { id: "prescribed", name: "Prescribed Debt Kit", key: "kits/prescribed.zip", amount: 347 },
-  "397.00": { id: "adverse", name: "Adverse Information Kit", key: "kits/adverse.zip", amount: 397 },
-  "497.00": { id: "complete", name: "Complete Kit", key: "kits/complete.zip", amount: 497 },
-  "547.00": { id: "judgment", name: "Judgment Kit", key: "kits/judgment.zip", amount: 547 },
-  "597.00": { id: "ultimate", name: "Ultimate Bundle", key: "kits/ultimate.zip", amount: 597 },
+  "297.00": { id: "starter", name: "Listing Clarity Starter", key: "kits/starter.zip", amount: 297 },
+  "347.00": { id: "prescribed", name: "Collections & Prescription Path", key: "kits/prescribed.zip", amount: 347 },
+  "397.00": { id: "adverse", name: "Arrears Correction Educational Kit", key: "kits/adverse.zip", amount: 397 },
+  "497.00": { id: "debt-review", name: "Debt Review Exit Educational Kit", key: "kits/complete.zip", amount: 497 },
+  "547.00": { id: "judgement", name: "Judgement Review Pathway", key: "kits/judgment.zip", amount: 547 },
+  "597.00": { id: "ultimate", name: "Complete DIY Bundle", key: "kits/ultimate.zip", amount: 597 },
 };
 const TOKEN_TTL_SECONDS = 48 * 60 * 60;
 
