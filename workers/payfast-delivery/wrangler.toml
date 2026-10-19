@@ -1,0 +1,18 @@
+name = "ri-payment-delivery"
+main = "index.js"
+compatibility_date = "2026-10-19"
+workers_dev = true
+
+[[r2_buckets]]
+binding = "KITS"
+bucket_name = "removal-inspector"
+
+[[kv_namespaces]]
+binding = "PAYMENTS"
+id = "8aed2d6c74eb4832ba3998331d89005b"
+
+# Add these as encrypted Worker secrets before accepting live payments:
+# npx wrangler secret put PAYFAST_MERCHANT_ID
+# npx wrangler secret put DOWNLOAD_TOKEN_SECRET
+# DOWNLOAD_TOKEN_SECRET must be a long random value (at least 32 bytes).
+# PAYFAST ITN URL: https://ri-payment-delivery.removalinspector.workers.dev/api/payfast-itn
