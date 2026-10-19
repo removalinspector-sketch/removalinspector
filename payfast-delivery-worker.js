@@ -5,7 +5,7 @@
  *   D1 database: DB (run schema.sql)
  *   R2 bucket:   KITS_BUCKET (upload private ZIPs under the keys in PRODUCT_MAP)
  * Required secrets/vars:
- *   PAYFAST_MERCHANT_ID, PAYFAST_PASSPHRASE, RESEND_API_KEY
+ *   PAYFAST_MERCHANT_ID, RESEND_API_KEY
  *   DELIVERY_FROM (verified sender, e.g. Removal Inspector <support@removalinspector.co.za>)
  *   PUBLIC_ORIGIN (https://removalinspector.co.za)
  *   PAYFAST_MODE ("live" or "sandbox")
