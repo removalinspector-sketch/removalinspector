@@ -1,93 +1,63 @@
-# Removal Inspector — GitHub Pages Site
+# Removal Inspector — Website and Secure Digital Delivery
 
-Static site, no React, no build step. Ready for GitHub Pages.
+Production website: https://removalinspector.co.za/
 
-## Files
-- index.html — main site (checker + kits + FAQ + SEO)
-- assets/logo.jpg — logo
-- kits/ — delivery pages (optional)
+This repository contains the public educational website and the source for a separate Cloudflare Worker intended to deliver paid digital kits after server-verified PayFast payments.
 
-## PayFast Links (in order, fixed swap)
-- R297 Starter: https://payf.st/alu9y
-- R347 Prescribed: https://payf.st/w2pna
-- R397 Adverse: https://payf.st/21qvd
-- R497 Debt Review Exit Edu (MOST POPULAR): https://payf.st/d037g
-- R547 Judgement Review Pathway: https://payf.st/45p36
-- R597 Full Shield Bundle: https://payf.st/i1wd9
+## Customer-facing product catalogue
 
-## Deploy to GitHub Pages
-1. Create new repo: removalinspector (or removalinspector.co.za)
-2. Upload all files in this folder to repo root (drag & drop)
-3. Go to Settings > Pages
-4. Source: Deploy from a branch > main > / (root) > Save
-5. Your site will be live at https://YOURUSERNAME.github.io/removalinspector/
-6. For custom domain removalinspector.co.za: Settings > Pages > Custom domain > add removalinspector.co.za > add CNAME file (already included if needed) and set DNS A records to GitHub Pages IPs.
+| Product | Price | PayFast checkout |
+|---|---:|---|
+| Listing Clarity Starter | R297 | https://payf.st/nkq21 |
+| Collections & Prescription Path | R347 | https://payf.st/wruhd |
+| Arrears Correction Educational Kit | R397 | https://payf.st/obtch |
+| Debt Review Exit Educational Kit | R497 | https://payf.st/xcztv |
+| Judgement Review Pathway | R547 | https://payf.st/sq6ow |
+| Complete DIY Bundle | R597 | https://payf.st/rwxl4 |
 
-## PayFast ITN Setup (smooth download)
-In PayFast dashboard for each product:
-- return_url: https://removalinspector.co.za/download.html?kit=starter (or prescribed, adverse, debt-review, judgement, ultimate)
-- cancel_url: https://removalinspector.co.za/#checker
-- notify_url: https://removalinspector.co.za/api/payfast-itn.php (implement email sending)
+The materials are general educational self-help resources. Removal Inspector is not a law firm or debt counsellor, does not lodge disputes on customers' behalf, and cannot guarantee removal, correction, score improvement, or a particular outcome. Customers must check that a template applies to their facts and follow the relevant official process.
 
-After payment, customer lands on download page with ZIP:
-- RI-Starter-R297-Kit.zip
-- RI-Prescribed-R347-Kit.zip
-- RI-Adverse-R397-Kit.zip
-- RI-DebtReview-R497-Kit.zip
-- RI-Judgment-R547-Kit.zip
-- ULTIMATE_BUNDLE_R597_KIT6.zip
+## Payment and delivery status
 
-Link expires 48h, re-send within 7 days via support@removalinspector.co.za
+**Do not treat a PayFast return/thank-you page, a query parameter, browser storage, or a payment reference entered by a customer as proof of payment.** The old localStorage-based download flow is not payment verification and must not be restored.
 
-## SEO
-- Single H1, proper H2/H3 hierarchy
-- Meta title/description optimized for "blacklisted" + compliant wording
-- FAQPage, Organization, HowTo, Product JSON-LD included
-- Open Graph + canonical
-- Mobile-first, fast (Tailwind CDN, no React)
+The secure backend source is `payfast-delivery-worker.js`. It is designed to:
+1. validate PayFast server-to-server ITN notifications;
+2. require a completed payment from the configured merchant;
+3. map only the six recognised gross amounts to a product;
+4. record payment IDs in D1 to prevent duplicate fulfilment;
+5. create time-limited bearer links for private R2 objects; and
+6. email download links using a configured delivery provider.
 
+**Automated delivery is not live until all six kit ZIPs are uploaded to private R2, email sender/API credentials are configured, PayFast ITN settings are saved, the Worker is deployed and routed, and end-to-end tests pass.** Until then, the website must continue to state that delivery is arranged manually after support verifies the payment.
 
-## Instant Download Mechanism — How it Works After Payment
+## Cloudflare resources
 
-This static site has a full instant download flow that works on GitHub Pages (no server needed) + optional PayFast ITN for email backup.
+- Worker: `removal-inspector-delivery`
+- D1 database: `removal-inspector-delivery`
+- Private R2 bucket: `removal-inspector-private-kits`
+- Worker source: `payfast-delivery-worker.js`
+- Database schema: `schema.sql`
+- Setup runbook: `DIGITAL_DELIVERY_SETUP.md`
 
-### Customer Flow
-1. Customer clicks BUY on index.html → we store `ri_pending_kit` in localStorage + open PayFast link `https://payf.st/alu9y` etc in new tab
-2. PayFast payment → PayFast redirects to `download.html?kit=debt-review&paid=1&ref=PFxxxx` (configure return_url in PayFast dashboard per product)
-3. `download.html` on load:
-   - Reads `kit` param (starter, prescribed, adverse, debt-review, judgement, ultimate)
-   - If `paid=1` present OR `kit` param present, auto-unlocks that kit in localStorage with 48h expiry
-   - If kit is `ultimate` (R597), unlocks ALL 6 kits
-   - Auto-starts ZIP download after 1.5 seconds
-   - Shows portal of all kits: unlocked = Download ZIP, locked = Buy button
-4. `my-downloads.html` portal reads localStorage `ri_purchases` and shows all unlocked kits for 48h
-5. If customer closed tab before redirect, they can enter PayFast reference on download.html to unlock (matches short code alu9y, w2pna, etc)
+Never put API keys, merchant secrets, paid ZIP files, or customer data in this public repository. Keep the R2 bucket private.
 
-### Files
-- `index.html` — checker + kits grid with PayFast links + pending storage
-- `download.html` — instant download logic, auto-download, 48h expiry, all kits portal
-- `my-downloads.html` — portal of purchases from this browser
-- `kits/*.zip` — actual product ZIPs (6 files) that download instantly
-- `payfast-itn-worker.js` — Cloudflare Worker example for real PayFast ITN verification + emailing download link (for production)
+## Launch checklist
 
-### PayFast Dashboard Setup (do for each of 6 short links)
-In PayFast → My Account → Payment Links → Edit each payf.st link:
-- return_url: `https://removalinspector.co.za/download.html?kit=debt-review&paid=1` (change kit per product)
-  - starter: `...?kit=starter&paid=1`
-  - prescribed: `...?kit=prescribed&paid=1`
-  - adverse: `...?kit=adverse&paid=1`
-  - debt-review: `...?kit=debt-review&paid=1` (R497 d037g MOST POPULAR — rightful place)
-  - judgement: `...?kit=judgement&paid=1` (R547 45p36 — rightful place)
-  - ultimate: `...?kit=ultimate&paid=1`
-- cancel_url: `https://removalinspector.co.za/index.html#kits`
-- notify_url: `https://your-worker.workers.dev/payfast-itn` (deploy payfast-itn-worker.js to Cloudflare)
+- [ ] Review the actual contents of all six kits; descriptions must match what is delivered.
+- [ ] Upload all six ZIPs to the private R2 keys documented in `DIGITAL_DELIVERY_SETUP.md`.
+- [ ] Configure the verified delivery email sender and provider API key as Worker secrets.
+- [ ] Configure PayFast ITN/notify URL to `https://removalinspector.co.za/api/payfast-itn`.
+- [ ] Set each payment link's return URL to a neutral confirmation/support page; never unlock based on return URL parameters.
+- [ ] Deploy and test the Worker, D1 and R2 bindings.
+- [ ] Confirm the `/api/*` route does not disrupt the existing Pages website.
+- [ ] Test all six valid payments, wrong amounts, invalid notifications, pending payments, duplicate notifications, email failure, missing objects, expired links and revoked/refunded payments.
+- [ ] Make a controlled low-value live test before advertising automatic delivery.
+- [ ] Update website copy to say “automatic download” only after the above tests pass.
 
-### LocalStorage Keys
-- `ri_pending_kit` — kit user clicked before PayFast
-- `ri_purchases` — JSON object: { "debt-review": {time, expiry, ref, unlocked:true}, ... }
+## SEO and customer trust
 
-### Expiry
-48 hours from payment. After expiry, customer can re-unlock via reference or contact support@removalinspector.co.za for re-send within 7 days.
-
-### Security Note
-For GitHub Pages, client-side unlock is for instant UX. For true verification, deploy the Cloudflare Worker (payfast-itn-worker.js) that verifies ITN signature with PayFast and emails the ZIP link. That way even if localStorage cleared, customer has email backup.
+- Keep the sitemap limited to public pages that load successfully.
+- Do not publish paid kits or download tokens in the sitemap.
+- Do not add fake reviews, unsupported popularity labels, guaranteed results, or invented response-time promises.
+- Use clear product contents, prices, limitations, contact details, refund terms and privacy disclosures.
