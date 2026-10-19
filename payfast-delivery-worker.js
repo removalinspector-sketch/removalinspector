@@ -147,6 +147,36 @@ async function handleITN(request, env) {
   }
   return new Response("OK", { status: 200 });
 }
+async function handleReissue(request, env) {
+  if (request.method !== "POST") return new Response("Method not allowed", { status: 405 });
+  const auth = request.headers.get("authorization") || "";
+  if (!env.DELIVERY_ADMIN_KEY || !safeEqual(auth, `Bearer ${env.DELIVERY_ADMIN_KEY}`)) {
+    return json({ error: "Unauthorized" }, 401);
+  }
+  let body;
+  try { body = await request.json(); } catch { return json({ error: "Invalid JSON" }, 400); }
+  const paymentId = String(body.pf_payment_id || "").trim();
+  if (!paymentId || paymentId.length > 100) return json({ error: "PayFast payment reference is required." }, 400);
+
+  const payment = await env.DB.prepare(
+    "SELECT pf_payment_id, product_id, buyer_email, status FROM payments WHERE pf_payment_id = ?1"
+  ).bind(paymentId).first();
+  if (!payment || payment.status !== "complete") return json({ error: "No verified completed payment found." }, 404);
+
+  const product = Object.values(PRODUCT_MAP).find(p => p.id === payment.product_id);
+  if (!product) return json({ error: "Product configuration error." }, 500);
+  const token = randomToken();
+  const tokenHash = await sha256Hex(token);
+  const expiresAt = Math.floor(Date.now() / 1000) + TOKEN_TTL_SECONDS;
+  await env.DB.prepare(
+    "UPDATE payments SET token_hash = ?1, expires_at = ?2 WHERE pf_payment_id = ?3 AND status = 'complete'"
+  ).bind(tokenHash, expiresAt, paymentId).run();
+
+  const url = `${baseOrigin(env)}/api/download?token=${token}`;
+  const sent = await sendDeliveryEmail(env, payment.buyer_email, product, url, expiresAt);
+  if (!sent) return json({ error: "Payment is verified, but email delivery failed. Check the email provider configuration and retry." }, 502);
+  return json({ ok: true, product: product.id, expires_at: expiresAt });
+}
 async function handleDownload(request, env) {
   if (request.method !== "GET") return new Response("Method not allowed", { status: 405 });
   const token = new URL(request.url).searchParams.get("token") || "";
@@ -181,7 +211,7 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     if (url.pathname === "/api/payfast-itn") return handleITN(request, env);
-    if (url.pathname === "/api/download") return handleDownload(request, env);
+    if (url.pathname === "/api/download") return handleDownload(request, env);\n    if (url.pathname === "/api/reissue") return handleReissue(request, env);
     if (url.pathname === "/api/health") {
       return json({ service: "removal-inspector-delivery", status: "ok" });
     }
