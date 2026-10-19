@@ -441,7 +441,7 @@ footer{border-top:1px solid var(--border);padding:56px 0 32px;background:rgba(0,
     {"@type":"Question","name":"What is Form 19 clearance certificate?","acceptedAnswer":{"@type":"Answer","text":"Removal Inspector does not issue Form 19. Contact your registered debt counsellor to confirm whether a clearance certificate or another process applies to your circumstances."}}},
     {"@type":"Question","name":"How long can a credit-report dispute take?","acceptedAnswer":{"@type":"Answer","text":"Timing depends on the type of dispute, evidence and applicable process. Check the relevant bureau’s current dispute instructions and applicable law. Our tracker is an organisational aid, not a guarantee of a deadline or outcome."}}},
     {"@type":"Question","name":"Paid account still showing as outstanding?","acceptedAnswer":{"@type":"Answer","text":"There may be several explanations. Compare the report with settlement evidence and ask the relevant bureau how to challenge information you believe is inaccurate or out of date. This checker cannot determine the cause."}}},
-    {"@type":"Question","name":"Will bureau definitely remove?","acceptedAnswer":{"@type":"Answer","text":"UNKNOWN: Whether information qualifies for removal/update is determined by bureaus after investigation per Sec71(5)/Sec72. No guarantee. We cannot predict outcome."}}
+    {"@type":"Question","name":"Will bureau definitely remove?","acceptedAnswer":{"@type":"Answer","text":"UNKNOWN: Whether information qualifies for removal/update is determined by bureaus after investigation depending on the applicable process. No guarantee. We cannot predict outcome."}}
   ]
 }
 </script>
@@ -553,7 +553,7 @@ footer{border-top:1px solid var(--border);padding:56px 0 32px;background:rgba(0,
       </div>
       <div class="match-result" id="matchResult">
         <div class="conf-row">
-          <div class="conf-bar"><span id="confBar" style="width:100%"></span></div>
+          
           <span class="conf-label" id="confLabel">Suggested kit</span>
         </div>
         <span class="match-kit-tag" id="mrTag">Kit 1 · Starter</span>
@@ -739,12 +739,12 @@ footer{border-top:1px solid var(--border);padding:56px 0 32px;background:rgba(0,
   <div class="wrap">
     <div class="sec-head reveal"><span class="sec-eyebrow">Frequently Asked</span><h2 class="sec-title">Straight answers, <em>no fine print</em></h2></div>
     <div class="faq-list">
-      <div class="faq-item reveal"><button class="faq-q">Is this legal advice?<i data-lucide="chevron-down" class="chev" style="width:18px;height:18px"></i></button><div class="faq-a"><div class="faq-a-inner">No. Removal Inspector sells educational templates and guides. We are not attorneys, not debt counsellors, and we do not lodge disputes on your behalf. We explain the NCA Sec 71(5)/Sec 72 process and give you the letter templates and checklists to do it yourself. For legal representation, consult an attorney or registered debt counsellor.</div></div></div>
+      <div class="faq-item reveal"><button class="faq-q">Is this legal advice?<i data-lucide="chevron-down" class="chev" style="width:18px;height:18px"></i></button><div class="faq-a"><div class="faq-a-inner">No. Removal Inspector sells educational templates and guides. We are not attorneys, not debt counsellors, and we do not lodge disputes on your behalf. We provide general educational materials and templates. Check the applicable official process and seek qualified advice when needed. For legal representation, consult an attorney or registered debt counsellor.</div></div></div>
       <div class="faq-item reveal"><button class="faq-q">Do you guarantee removal of my adverse listing?<i data-lucide="chevron-down" class="chev" style="width:18px;height:18px"></i></button><div class="faq-a"><div class="faq-a-inner">No. We cannot guarantee that information will be removed, changed or updated. Outcomes depend on the facts, evidence, applicable rules and decisions by the relevant bureau, creditor or court. We also do not guarantee that a template suits every case. Be cautious of providers promising a particular outcome before reviewing your circumstances.</div></div></div>
       <div class="faq-item reveal"><button class="faq-q">How long will a dispute take?<i data-lucide="chevron-down" class="chev" style="width:18px;height:18px"></i></button><div class="faq-a"><div class="faq-a-inner">We do not promise a fixed processing time. The applicable timeline depends on the dispute type, evidence and current rules and process. Check the relevant bureau’s official instructions and applicable legal requirements. Our tracker is a reminder tool, not a guarantee or legal determination.</div></div></div>
       <div class="faq-item reveal"><button class="faq-q">How should I protect my identity documents?<i data-lucide="chevron-down" class="chev" style="width:18px;height:18px"></i></button><div class="faq-a"><div class="faq-a-inner">Share only the personal information required for the specific process. Do not assume every bureau or creditor accepts a masked ID: follow the recipient’s official secure verification instructions. Do not send full identity documents or account details to an unverified email address or WhatsApp number.</div></div></div>
       <div class="faq-item reveal"><button class="faq-q">Can Removal Inspector issue Form 19 or remove a debt-review flag?<i data-lucide="chevron-down" class="chev" style="width:18px;height:18px"></i></button><div class="faq-a"><div class="faq-a-inner">No. We do not issue Form 19, act as your debt counsellor, submit applications on your behalf or remove bureau flags. Contact your registered debt counsellor to confirm your status and the process that applies to you. Court-related steps may require qualified legal advice. Our kit is educational only.</div></div></div>
-      <div class="faq-item reveal"><button class="faq-q">How do I receive my kit after paying?<i data-lucide="chevron-down" class="chev" style="width:18px;height:18px"></i></button><div class="faq-a"><div class="faq-a-inner">After paying, contact support with your PayFast payment reference so the team can confirm the payment and arrange delivery. This website does not yet verify payments or unlock downloads automatically. Email support@removalinspector.co.za<br>Durban HQ · SA<br>Mon-Fri 9-5 SAST within 7 days and we'll re-send it free.</div></div></div>
+      <div class="faq-item reveal"><button class="faq-q">How do I receive my kit after paying?<i data-lucide="chevron-down" class="chev" style="width:18px;height:18px"></i></button><div class="faq-a"><div class="faq-a-inner">After paying, contact support with your PayFast payment reference so the team can confirm the payment and arrange delivery. This website does not yet verify payments or unlock downloads automatically. Email support@removalinspector.co.za<br>Durban HQ · SA<br>Support hours: Monday to Friday, 09:00–17:00 South African time. If a delivered file is missing, contact support within 7 days.</div></div></div>
     </div>
   </div>
 </section>
@@ -853,7 +853,7 @@ footer{border-top:1px solid var(--border);padding:56px 0 32px;background:rgba(0,
     document.getElementById('mrPrice').textContent = k.price;
     document.getElementById('mrWhy').textContent = k.why;
     document.getElementById('confLabel').textContent = 'Suggested kit';
-    document.getElementById('confBar').style.width = k.conf + '%';
+    
     var featsUl = document.getElementById('mrFeats');
     featsUl.innerHTML='';
     k.feats.forEach(function(f){
@@ -887,7 +887,7 @@ footer{border-top:1px solid var(--border);padding:56px 0 32px;background:rgba(0,
     document.getElementById('mrPrice').textContent = k.price;
     document.getElementById('mrWhy').textContent = k.why;
     document.getElementById('confLabel').textContent = 'Suggested kit';
-    document.getElementById('confBar').style.width = k.conf + '%';
+    
     var featsUl = document.getElementById('mrFeats'); featsUl.innerHTML='';
     k.feats.forEach(function(f){ var li=document.createElement('li'); li.innerHTML='<i data-lucide="check-circle-2" style="width:15px;height:15px"></i>'+f; featsUl.appendChild(li); });
     bundleUpsell.style.display='none';
