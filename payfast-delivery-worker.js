@@ -211,7 +211,8 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     if (url.pathname === "/api/payfast-itn") return handleITN(request, env);
-    if (url.pathname === "/api/download") return handleDownload(request, env);\n    if (url.pathname === "/api/reissue") return handleReissue(request, env);
+    if (url.pathname === "/api/download") return handleDownload(request, env);
+    if (url.pathname === "/api/reissue") return handleReissue(request, env);
     if (url.pathname === "/api/health") {
       return json({ service: "removal-inspector-delivery", status: "ok" });
     }
