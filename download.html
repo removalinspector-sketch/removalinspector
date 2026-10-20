@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Digital Kit Delivery Support | Removal Inspector</title>
-<meta name="description" content="Need help receiving your Removal Inspector digital kit? Send your PayFast payment reference to support for manual confirmation and delivery assistance.">
+<meta name="description" content="Removal Inspector WhatsApp consultation and manual educational-kit delivery information. No online checkout or automatic downloads.">
 <link rel="canonical" href="https://removalinspector.co.za/download.html">
 <meta name="robots" content="noindex,follow">
 <style>
@@ -14,12 +14,11 @@
 <body><main class="card">
 <p><strong>REMOVAL INSPECTOR · DIGITAL KIT SUPPORT</strong></p>
 <h1>Payment confirmation and digital delivery support</h1>
-<p>Automated delivery is being prepared but is not yet available. This page does not verify PayFast payments or unlock files. Please send your PayFast payment reference to support so the payment can be checked and the correct kit can be delivered manually.</p>
-<div class="notice"><strong>Important:</strong> Do not send your password, full card details, or identity document over WhatsApp. A PayFast payment reference and the product purchased should be enough to start the enquiry.</div>
-<p id="purchase-details">Include the product name, amount and PayFast payment reference in your message. Do not send card details, passwords or identity documents.</p>
-<a class="btn" id="wa-link" href="https://wa.me/27757931848" target="_blank" rel="noopener">Contact WhatsApp support</a>
+<p>No online checkout or automatic download is available. Please discuss your situation and the relevant educational resources with Removal Inspector on WhatsApp before making any payment. Never send passwords, card details or unnecessary identity documents.</div>
+<p id="purchase-details">Include the educational kit you want to discuss and any general questions. Do not send card details, passwords or identity documents. Do not send card details, passwords or identity documents.</p>
+<a class="btn" id="wa-link" href="https://wa.me/27757931848" target="_blank" rel="noopener">Start WhatsApp consultation</a>
 <a class="btn secondary" href="mailto:support@removalinspector.co.za">Email support</a>
-<p class="small">Educational templates only. Removal Inspector does not guarantee credit-record changes and does not provide legal representation. If you have already paid, keep your PayFast confirmation for your records.</p>
+<p class="small">Educational templates only. Removal Inspector does not guarantee credit-record changes and does not provide legal representation. If you have already paid, keep your payment confirmation for your records.</p>
 </main>
 <script>
 const q=new URLSearchParams(location.search);
@@ -28,9 +27,9 @@ const ref=q.get("ref");
 const labels={"starter":"Listing Clarity Starter (R297)","prescribed":"Collections & Prescription Path (R347)","adverse":"Arrears Correction Educational Kit (R397)","debt-review":"Debt Review Exit Educational Kit (R497)","judgement":"Judgement Review Pathway (R547)","ultimate":"Complete DIY Bundle (R597)"};
 const details=[];
 if(kit) details.push("Product: "+(labels[kit]||kit));
-if(ref) details.push("PayFast reference: "+ref);
+if(ref) details.push("Payment reference: "+ref);
 if(details.length) document.getElementById("purchase-details").textContent=details.join(" · ");
-const msg="Hello Removal Inspector. Please confirm my PayFast payment and arrange delivery."+(kit?" Product: "+(labels[kit]||kit)+".":"")+(ref?" PayFast reference: "+ref+".":"");
+const msg="Hello Removal Inspector. I would like to discuss your educational kits and the service that may suit my situation."+(kit?" Product: "+(labels[kit]||kit)+".":"")+(ref?" Payment reference: "+ref+".":"");
 document.getElementById("wa-link").href="https://wa.me/27757931848?text="+encodeURIComponent(msg);
 </script>
 </body></html>
