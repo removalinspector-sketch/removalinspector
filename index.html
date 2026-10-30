@@ -917,17 +917,24 @@ footer{border-top:1px solid var(--border);padding:56px 0 32px;background:rgba(0,
     showToast('Switched to Complete DIY Bundle. View the product page for details.');
   });
 
-  // Recommendation button -> WhatsApp consultation (no online checkout)
+  // Recommendation button -> direct WhatsApp consultation (no product-page detour)
   document.getElementById('mrBuy').addEventListener('click', function(e){
     e.preventDefault();
     var k = KITS[matchedId];
-    if(k && k.whatsappUrl){
-      setWizard(3);
-      window.location.href = k.productUrl;
-      showToast('Opening kit details and pricing');
-    } else {
-      setWizard(3);
-    }
+    if(!k || !k.whatsappUrl) return;
+
+    var issues = Array.prototype.map.call(
+      document.querySelectorAll('.situ-card.active .situ-txt .t'),
+      function(el){ return el.textContent.trim(); }
+    );
+    var message = 'Hello Removal Inspector, I completed the free checker on your website.'
+      + (issues.length ? ' My selected credit-profile issue(s): ' + issues.join(', ') + '.' : '')
+      + ' The checker recommended: ' + k.name
+      + '. Please explain the next steps and the price.';
+    var whatsappUrl = 'https://wa.me/27757931848?text=' + encodeURIComponent(message);
+
+    setWizard(3);
+    window.location.href = whatsappUrl;
   });
 
   // ---------- Delivery kit selector ----------
