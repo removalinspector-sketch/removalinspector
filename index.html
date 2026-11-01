@@ -654,7 +654,7 @@ table.compare { min-width:680px; }
       <div class="match-empty" id="matchEmpty">
         <div class="icon-box"><i data-lucide="mouse-pointer-click" style="width:24px;height:24px"></i></div>
         <div class="big">Select your situation</div>
-        <div class="small">Choose 1 or more adverse information types on the left.<br>We'll match you to the correct kit — Six educational pathways.</div>
+        <div class="small">Choose the issue you want help understanding.<br>We’ll suggest a relevant educational pathway — you can discuss it with us before deciding.</div>
       </div>
       <div class="match-result" id="matchResult">
         <div class="conf-row">
@@ -663,7 +663,7 @@ table.compare { min-width:680px; }
         </div>
         <span class="match-kit-tag" id="mrTag">Kit 1 · Starter</span>
         <div class="match-kit-name" id="mrName">Listing Clarity Starter</div>
-        <div class="match-kit-price"><span class="amt" id="mrPrice">View details</span><span class="once">See the kit page for price and contents</span></div>
+        <div class="match-kit-price"><span class="amt" id="mrPrice">View details</span><span class="once">once-off · discuss details on WhatsApp</span></div>
         <div class="why-kit"><i data-lucide="info"></i><span id="mrWhy">Choose one or more situations on the left to receive a relevant educational kit recommendation.</span></div>
         <ul class="match-features" id="mrFeats">
           <li><i data-lucide="check-circle-2"></i>Credit-entry review checklist</li>
@@ -673,10 +673,10 @@ table.compare { min-width:680px; }
         </ul>
         <div class="bundle-upsell" id="bundleUpsell" style="display:none"><i data-lucide="gift"></i><span>Multiple issues across the listed topics? <b>Review the Complete DIY Bundle</b> — contains the five educational packs. Check the contents and price on its product page.</span></div>
         <div class="match-actions">
-          <a href="#kits" class="btn btn-primary" id="mrBuy">Discuss on WhatsApp <i data-lucide="message-circle" style="width:15px;height:15px"></i></a>
-          <a href="#delivery" class="btn btn-ghost">Preview</a>
+          <a href="#kits" class="btn btn-primary" id="mrBuy">Ask about this kit on WhatsApp <i data-lucide="message-circle" style="width:15px;height:15px"></i></a>
+          <a href="#how" class="btn btn-ghost">How it works</a>
         </div>
-        <div class="match-note">Educational only. Outcomes depend on the facts and relevant decision-makers.</div>
+        <div class="match-note">Suggested starting point only — this checker does not read your credit report or confirm whether an entry can be changed. We will explain the kit contents and price before you decide whether to proceed.</div>
       </div>
       <div class="panel-badges">
         <div class="panel-badge"><div class="v">DIY</div><div class="k">Educational guide</div></div>
@@ -969,12 +969,12 @@ table.compare { min-width:680px; }
   if(window.lucide){ lucide.createIcons(); }
 
   var KITS = {
-    k1:{tag:'Starter pathway',name:'Listing Clarity Starter',price:'',productUrl:'/listing-clarity-starter/',conf:82,why:'You selected enquiry or wording-related listings. This starter kit decodes your profile and gives you first dispute letter templates.',whatsappUrl:'https://wa.me/27757931848?text=Hello%20Removal%20Inspector%2C%20I%27d%20like%20WhatsApp%20consulting%20about%20the%20Listing%20Clarity%20Starter%20kit%20(R297).',zip:'RI-ListingClarity-R297-Kit.zip',size:'ZIP package',feats:['Credit-entry review checklist','General dispute request template','Follow-up log','Secure-submission reminders']},
-    k2:{tag:'Prescription pathway',name:'Collections & Prescription Path',price:'',productUrl:'/collections-prescription-path/',conf:88,why:'Collections or prescribed debt detected. This kit validates the collection, helps organise questions about possible prescription issues; seek qualified advice, and gives escalation letters.',whatsappUrl:'https://wa.me/27757931848?text=Hello%20Removal%20Inspector%2C%20I%27d%20like%20WhatsApp%20consulting%20about%20the%20Collections%20%26%20Prescription%20kit%20(R347).',zip:'RI-Collections-R347-Kit.zip',size:'ZIP package',feats:['Date and document worksheet','Request-for-records template','Collection facts log','Questions for a qualified adviser']},
-    k3:{tag:'Arrears pathway',name:'Arrears Correction Educational Kit',price:'',productUrl:'/adverse-credit-listing-correction-kit/',conf:90,why:'Arrears or paid-up adverse listing detected. This kit packs paid-up evidence and bureau update templates.',whatsappUrl:'https://wa.me/27757931848?text=Hello%20Removal%20Inspector%2C%20I%27d%20like%20WhatsApp%20consulting%20about%20the%20Arrears%20Correction%20kit%20(R397).',zip:'RI-Arrears-R397-Kit.zip',size:'ZIP package',feats:['Paid-up evidence checklist','Paid-up evidence checklist','Update request template','Update tracker']},
-    k4:{tag:'Debt Review pathway',name:'Debt Review Exit Educational Kit',price:'',productUrl:'/debt-review-flag-guidance-kit/',conf:92,why:'Debt review / D-flag selected. This educational kit explains questions to raise with your registered debt counsellor and how to organise relevant documents.',whatsappUrl:'https://wa.me/27757931848?text=Hello%20Removal%20Inspector%2C%20I%27d%20like%20WhatsApp%20consulting%20about%20the%20Debt%20Review%20kit%20(R497).',zip:'RI-DebtReview-R497-Kit.zip',size:'ZIP package',feats:['Debt-review status checklist','Request-to-counsellor template','Debt-review status log','Form 19 process limitations']},
-    k5:{tag:'Judgment-related documents',name:'Judgement Review Pathway',price:'',productUrl:'/judgment-credit-record-guidance-kit/',conf:91,why:'You selected a judgment-related issue. This educational kit helps organise documents and questions; court procedures may require qualified legal advice.',whatsappUrl:'https://wa.me/27757931848?text=Hello%20Removal%20Inspector%2C%20I%27d%20like%20WhatsApp%20consulting%20about%20the%20Judgment%20Review%20kit%20(R547).',zip:'RI-Judgement-R547-Kit.zip',size:'ZIP package',feats:['Judgment information checklist','Court-record request template','Court-process information guide (not legal advice)','Qualified-advice reminders']},
-    k6:{tag:'Complete bundle',name:'Complete DIY Bundle',price:'',productUrl:'/ultimate-credit-profile-bundle/',conf:97,why:'Multiple issues selected. This bundle groups the listed educational resources; check the contents before buying.',whatsappUrl:'https://wa.me/27757931848?text=Hello%20Removal%20Inspector%2C%20I%27d%20like%20WhatsApp%20consulting%20about%20the%20Complete%20DIY%20Bundle%20(R597).',zip:'RI-FullShield-R597-Bundle.zip',size:'ZIP package',feats:['All five educational packs included','All five educational packs','Case and follow-up logs','Single ZIP containing all five educational packs']}
+    k1:{tag:'Starter pathway',name:'Listing Clarity Starter',price:'R297',productUrl:'/listing-clarity-starter/',conf:82,why:'You selected enquiry or wording-related listings. This starter kit decodes your profile and gives you first dispute letter templates.',whatsappUrl:'https://wa.me/27757931848?text=Hello%20Removal%20Inspector%2C%20I%27d%20like%20WhatsApp%20consulting%20about%20the%20Listing%20Clarity%20Starter%20kit%20(R297).',zip:'RI-ListingClarity-R297-Kit.zip',size:'ZIP package',feats:['Credit-entry review checklist','General dispute request template','Follow-up log','Secure-submission reminders']},
+    k2:{tag:'Prescription pathway',name:'Collections & Prescription Path',price:'R347',productUrl:'/collections-prescription-path/',conf:88,why:'Collections or prescribed debt detected. This kit validates the collection, helps organise questions about possible prescription issues; seek qualified advice, and gives escalation letters.',whatsappUrl:'https://wa.me/27757931848?text=Hello%20Removal%20Inspector%2C%20I%27d%20like%20WhatsApp%20consulting%20about%20the%20Collections%20%26%20Prescription%20kit%20(R347).',zip:'RI-Collections-R347-Kit.zip',size:'ZIP package',feats:['Date and document worksheet','Request-for-records template','Collection facts log','Questions for a qualified adviser']},
+    k3:{tag:'Arrears pathway',name:'Arrears Correction Educational Kit',price:'R397',productUrl:'/adverse-credit-listing-correction-kit/',conf:90,why:'Arrears or paid-up adverse listing detected. This kit packs paid-up evidence and bureau update templates.',whatsappUrl:'https://wa.me/27757931848?text=Hello%20Removal%20Inspector%2C%20I%27d%20like%20WhatsApp%20consulting%20about%20the%20Arrears%20Correction%20kit%20(R397).',zip:'RI-Arrears-R397-Kit.zip',size:'ZIP package',feats:['Paid-up evidence checklist','Paid-up evidence checklist','Update request template','Update tracker']},
+    k4:{tag:'Debt Review pathway',name:'Debt Review Exit Educational Kit',price:'R497',productUrl:'/debt-review-flag-guidance-kit/',conf:92,why:'Debt review / D-flag selected. This educational kit explains questions to raise with your registered debt counsellor and how to organise relevant documents.',whatsappUrl:'https://wa.me/27757931848?text=Hello%20Removal%20Inspector%2C%20I%27d%20like%20WhatsApp%20consulting%20about%20the%20Debt%20Review%20kit%20(R497).',zip:'RI-DebtReview-R497-Kit.zip',size:'ZIP package',feats:['Debt-review status checklist','Request-to-counsellor template','Debt-review status log','Form 19 process limitations']},
+    k5:{tag:'Judgment-related documents',name:'Judgement Review Pathway',price:'R547',productUrl:'/judgment-credit-record-guidance-kit/',conf:91,why:'You selected a judgment-related issue. This educational kit helps organise documents and questions; court procedures may require qualified legal advice.',whatsappUrl:'https://wa.me/27757931848?text=Hello%20Removal%20Inspector%2C%20I%27d%20like%20WhatsApp%20consulting%20about%20the%20Judgment%20Review%20kit%20(R547).',zip:'RI-Judgement-R547-Kit.zip',size:'ZIP package',feats:['Judgment information checklist','Court-record request template','Court-process information guide (not legal advice)','Qualified-advice reminders']},
+    k6:{tag:'Complete bundle',name:'Complete DIY Bundle',price:'R597',productUrl:'/ultimate-credit-profile-bundle/',conf:97,why:'Multiple issues selected. This bundle groups the listed educational resources; check the contents before buying.',whatsappUrl:'https://wa.me/27757931848?text=Hello%20Removal%20Inspector%2C%20I%27d%20like%20WhatsApp%20consulting%20about%20the%20Complete%20DIY%20Bundle%20(R597).',zip:'RI-FullShield-R597-Bundle.zip',size:'ZIP package',feats:['All five educational packs included','All five educational packs','Case and follow-up logs','Single ZIP containing all five educational packs']}
   };
 
   // ---------- Toast ----------
@@ -1024,7 +1024,7 @@ table.compare { min-width:680px; }
     var k = KITS[kitId];
     document.getElementById('mrTag').textContent = k.tag;
     document.getElementById('mrName').textContent = k.name;
-    document.getElementById('mrPrice').textContent = 'View details';
+    document.getElementById('mrPrice').textContent = k.price;
     document.getElementById('mrWhy').textContent = k.why;
     document.getElementById('confLabel').textContent = 'Suggested kit';
     
@@ -1058,7 +1058,7 @@ table.compare { min-width:680px; }
     var k = KITS.k6;
     document.getElementById('mrTag').textContent = k.tag;
     document.getElementById('mrName').textContent = k.name;
-    document.getElementById('mrPrice').textContent = 'View details';
+    document.getElementById('mrPrice').textContent = k.price;
     document.getElementById('mrWhy').textContent = k.why;
     document.getElementById('confLabel').textContent = 'Suggested kit';
     
@@ -1095,7 +1095,13 @@ table.compare { min-width:680px; }
     var k = KITS[kitId];
     if(!k) return;
     document.getElementById('orderKitName').textContent = k.name;
-    document.getElementById('orderKitSub').textContent = 'Selected educational resource · view its product page for pricing';
+    document.getElementById('orderKitSub').textContent = 'Selected educational resource · ' + k.price + ' once-off';
+    var consultBtn = document.getElementById('consultBtn');
+    if(consultBtn){
+      var consultMessage = 'Hello Removal Inspector, I would like to discuss the ' + k.name + ' (' + k.price + '). Please explain what is included and whether it may suit my situation. I understand there is no guaranteed outcome.';
+      consultBtn.href = 'https://wa.me/27757931848?text=' + encodeURIComponent(consultMessage);
+      consultBtn.textContent = 'Ask about ' + k.name + ' on WhatsApp';
+    }
     var zipName = document.getElementById('zipName');
     var zipSize = document.getElementById('zipSize');
     if(zipName) zipName.textContent = 'Delivery details confirmed personally on WhatsApp';
