@@ -1114,6 +1114,8 @@ table.compare { min-width:680px; }
       setOrderKit(opt.getAttribute('data-kit'));
     });
   });
+  // Keep the default selected kit and WhatsApp message in sync on first load.
+  setOrderKit('k1');
 
   // ---------- Manual delivery support (no insecure client-side unlock) ----------
   // WhatsApp consultation is the only customer enquiry and purchase path. No online checkout or instant downloads.
