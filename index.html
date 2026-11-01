@@ -512,6 +512,11 @@ table.compare { min-width:680px; }
   .mobile-cta .btn { font-size:11px; }
 }
 
+
+/* Trust section responsive layout */
+.about-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:28px}
+.about-contact{display:grid;grid-template-columns:1.2fr .8fr;gap:22px;align-items:center}
+@media(max-width:760px){.about-cards{grid-template-columns:1fr}.about-contact{grid-template-columns:1fr}}
 </style>
 
 <script type="application/ld+json">
@@ -710,7 +715,7 @@ table.compare { min-width:680px; }
       <h2 class="sec-title">Clear guidance. <em>No false promises.</em></h2>
       <p class="sec-sub">Removal Inspector is a South African-focused educational service that helps people understand common credit-profile issues and prepare their next questions and documents.</p>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:28px">
+    <div class="about-cards">
       <article class="panel reveal">
         <div style="color:var(--green);margin-bottom:12px"><i data-lucide="book-open-check" style="width:25px;height:25px"></i></div>
         <h3 style="font-size:16px;margin-bottom:8px">Educational guidance</h3>
@@ -727,7 +732,7 @@ table.compare { min-width:680px; }
         <p style="font-size:13px;color:var(--muted);line-height:1.65">We are not a credit bureau, law firm or registered debt counsellor. We do not access your credit report, lodge disputes on your behalf, issue Form 19 or guarantee that information will be removed.</p>
       </article>
     </div>
-    <div class="panel reveal" style="margin-top:18px;border-color:var(--border-g);display:grid;grid-template-columns:1.2fr .8fr;gap:22px;align-items:center">
+    <div class="panel reveal" class="panel reveal about-contact" style="margin-top:18px;border-color:var(--border-g)">
       <div>
         <h3 style="font-size:17px;margin-bottom:8px">What happens before you pay?</h3>
         <p style="font-size:13px;color:var(--muted);line-height:1.7">We first discuss your situation on WhatsApp. If a kit appears relevant, we explain what it contains, its once-off price and how delivery works. You can review that information and decide whether to proceed. There is no obligation to buy during the initial enquiry.</p>
