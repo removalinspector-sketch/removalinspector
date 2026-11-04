@@ -223,3 +223,108 @@ body:not(:has(> header.top)) .btn-blue{background:linear-gradient(135deg,#398bd0
   body:not(:has(> header.top)) .nav-links a{color:#425a73!important}
   body:not(:has(> header.top)) .mobile-cta{box-shadow:0 -5px 20px rgba(22,47,77,.08)!important}
 }
+
+
+/* Final brightness pass — blue and green remain the brand colours */
+body:not(:has(> header.top)){
+  background:#fff!important;
+  color:#26384d!important;
+}
+body:not(:has(> header.top)) main,
+body:not(:has(> header.top)) section,
+body:not(:has(> header.top)) .section,
+body:not(:has(> header.top)) .section-inner{
+  background-color:transparent!important;
+}
+body:not(:has(> header.top)) section:nth-of-type(even){
+  background-color:#f5f8fc!important;
+}
+body:not(:has(> header.top)) .hero,
+body:not(:has(> header.top)) .hero-grid,
+body:not(:has(> header.top)) .hero-content{
+  background:transparent!important;
+}
+body:not(:has(> header.top)) .hero-title,
+body:not(:has(> header.top)) .sec-title,
+body:not(:has(> header.top)) .about-cards h3,
+body:not(:has(> header.top)) .about-contact h3,
+body:not(:has(> header.top)) .info-card h3,
+body:not(:has(> header.top)) .faq-q,
+body:not(:has(> header.top)) .delivery-left h3,
+body:not(:has(> header.top)) .order-kit h3{
+  color:#173653!important;
+}
+body:not(:has(> header.top)) .hero-sub,
+body:not(:has(> header.top)) .sec-sub,
+body:not(:has(> header.top)) .about-cards p,
+body:not(:has(> header.top)) .about-contact p,
+body:not(:has(> header.top)) .info-card p,
+body:not(:has(> header.top)) .delivery-left p,
+body:not(:has(> header.top)) .delivery-grid p,
+body:not(:has(> header.top)) .testi-grid p,
+body:not(:has(> header.top)) .order-kit p{
+  color:#586d82!important;
+}
+body:not(:has(> header.top)) .about-cards,
+body:not(:has(> header.top)) .about-contact,
+body:not(:has(> header.top)) .testi-grid,
+body:not(:has(> header.top)) .delivery-grid,
+body:not(:has(> header.top)) .delivery-left,
+body:not(:has(> header.top)) .kit-select,
+body:not(:has(> header.top)) .order-kit,
+body:not(:has(> header.top)) .info-cards,
+body:not(:has(> header.top)) .info-card,
+body:not(:has(> header.top)) .faq-list,
+body:not(:has(> header.top)) .faq-item,
+body:not(:has(> header.top)) .compare-wrap{
+  background:#fff!important;
+  color:#52677d!important;
+}
+body:not(:has(> header.top)) .testi-grid> *,
+body:not(:has(> header.top)) .delivery-grid> *,
+body:not(:has(> header.top)) .about-cards> *,
+body:not(:has(> header.top)) .about-contact> *,
+body:not(:has(> header.top)) .info-cards> *,
+body:not(:has(> header.top)) .kit-select> *,
+body:not(:has(> header.top)) .order-kit> *{
+  background:#fff!important;
+  border-color:#dfe7ef!important;
+  color:#52677d!important;
+  box-shadow:0 7px 22px rgba(25,55,85,.045)!important;
+}
+body:not(:has(> header.top)) .kit-opt{
+  background:#fff!important;border:1px solid #dce5ee!important;color:#29445f!important;
+}
+body:not(:has(> header.top)) .kit-opt.active,
+body:not(:has(> header.top)) .kit-opt.selected{
+  background:#eaf7f1!important;border-color:#20a879!important;color:#14583f!important;
+}
+body:not(:has(> header.top)) .kit-actions,
+body:not(:has(> header.top)) .kit-learn{
+  color:#276cae!important;
+}
+body:not(:has(> header.top)) .faq-item{border:1px solid #dfe7ef!important}
+body:not(:has(> header.top)) .faq-a,
+body:not(:has(> header.top)) .faq-a-inner{color:#586d82!important}
+body:not(:has(> header.top)) .stats-strip{background:#edf3f8!important}
+body:not(:has(> header.top)) .final-cta{background:#eaf5f0!important}
+body:not(:has(> header.top)) footer{
+  background:#173653!important;color:#eaf1f8!important;
+}
+body:not(:has(> header.top)) footer h4{color:#fff!important}
+body:not(:has(> header.top)) footer a,
+body:not(:has(> header.top)) .foot-contact{color:#d5e4f2!important}
+body:not(:has(> header.top)) .foot-legal,
+body:not(:has(> header.top)) .foot-bottom{color:#b6c9da!important;border-color:rgba(255,255,255,.16)!important}
+body:not(:has(> header.top)) .social-label{color:#c5d7e7!important}
+body:not(:has(> header.top)) .btn-primary,
+body:not(:has(> header.top)) .nav-cta{background:#087f5b!important;color:#fff!important}
+body:not(:has(> header.top)) .btn-blue{background:#276cae!important;color:#fff!important}
+body:not(:has(> header.top)) .btn-ghost{background:#fff!important;color:#245f9e!important;border:1px solid #cbdbea!important}
+body:not(:has(> header.top)) .kit.featured{background:#fff!important;border:2px solid #20a879!important}
+body:not(:has(> header.top)) .kit-badge.pop{background:#087f5b!important;color:#fff!important}
+body:not(:has(> header.top)) .kit-badge.val{background:#276cae!important;color:#fff!important}
+@media(max-width:760px){
+  body:not(:has(> header.top)) section:nth-of-type(even){background:#f5f8fc!important}
+  body:not(:has(> header.top)) .nav-links{background:#fff!important}
+}
