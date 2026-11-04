@@ -23,6 +23,9 @@
   .ri-send{border:0;border-radius:10px;background:#20c997;color:#06251f;font-weight:800;padding:0 15px;cursor:pointer}
   .ri-links{padding:0 12px 12px;font-size:12px;display:flex;justify-content:space-between;gap:10px}
   .ri-links a{color:#67e3c1;text-decoration:none}
+  .ri-whatsapp-action{display:inline-flex;align-items:center;justify-content:center;gap:9px;margin-top:10px;padding:13px 18px;min-height:46px;border-radius:10px;background:#20c997;color:#06251f!important;font-size:14px;font-weight:800;text-decoration:none!important;box-shadow:0 5px 18px #0003}
+  .ri-whatsapp-action:hover{filter:brightness(1.06)}
+  .ri-whatsapp-action svg{width:19px;height:19px;fill:currentColor;flex:none}
   .ri-page{max-width:900px;margin:40px auto;padding:0 18px}
   .ri-page .ri-shell{position:relative;right:auto;bottom:auto;width:100%;height:680px;max-height:75vh;display:flex;margin-top:22px}
   .ri-page .ri-launch{display:none}
@@ -51,13 +54,26 @@
   launch.addEventListener("click",()=>shell.classList.toggle("ri-open"));
   root.querySelector(".ri-close").addEventListener("click",()=>shell.classList.remove("ri-open"));
   function add(text,who){const el=document.createElement("div");el.className="ri-msg "+(who==="user"?"ri-user":"ri-bot");el.textContent=text;log.appendChild(el);log.scrollTop=log.scrollHeight;return el;}
+  function renderAssistant(el,reply){
+    const match=reply.match(/https:\/\/wa\.me\/27757931848(?:\?text=[^\s)<>]*)?/i);
+    if(!match){el.textContent=reply;return;}
+    const clean=reply.replace(match[0],"").replace(/[ \t]+\n/g,"\n").trim();
+    el.textContent=clean;
+    let url;
+    try{url=new URL(match[0]);}catch{el.textContent=reply;return;}
+    if(url.hostname!=="wa.me"||url.pathname!=="/27757931848"){el.textContent=reply;return;}
+    const button=document.createElement("a");
+    button.className="ri-whatsapp-action";button.href=url.href;button.target="_blank";button.rel="noopener noreferrer";
+    button.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.52 3.48A11.8 11.8 0 0 0 12.12 0C5.58 0 .25 5.32.25 11.86c0 2.09.55 4.13 1.59 5.93L.15 24l6.38-1.67a11.9 11.9 0 0 0 5.59 1.42h.01c6.54 0 11.87-5.32 11.87-11.86 0-3.17-1.24-6.15-3.48-8.41ZM12.13 21.7h-.01a9.86 9.86 0 0 1-5.02-1.37l-.36-.21-3.78.99 1.01-3.69-.23-.38a9.83 9.83 0 0 1-1.51-5.18c0-5.45 4.44-9.88 9.9-9.88a9.82 9.82 0 0 1 7 2.9 9.82 9.82 0 0 1 2.9 6.99c0 5.45-4.44 9.88-9.9 9.88Zm5.43-7.4c-.3-.15-1.77-.87-2.05-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.21 5.08 4.5.71.31 1.27.5 1.7.64.72.23 1.37.2 1.89.12.58-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.08-.13-.27-.2-.57-.35Z"/></svg><span>Continue on WhatsApp</span>';
+    el.appendChild(document.createElement("br"));el.appendChild(button);
+  }
   async function send(text){
     const clean=text.trim();if(!clean)return;
     add(clean,"user");history.push({role:"user",content:clean});input.value="";input.disabled=true;root.querySelector(".ri-send").disabled=true;
     const pending=add("Thinking…","assistant");
     try{
       const res=await fetch("/api/assistant",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({messages:history.slice(-10)})});
-      const data=await res.json();pending.textContent=data.reply||data.error||"Sorry, I could not respond. Please contact WhatsApp support.";
+      const data=await res.json();if(data.reply)renderAssistant(pending,data.reply);else pending.textContent=data.error||"Sorry, I could not respond. Please contact WhatsApp support.";
       if(data.reply)history.push({role:"assistant",content:data.reply});
     }catch(e){pending.textContent="The assistant is temporarily unavailable. Please contact WhatsApp support at 075 793 1848.";}
     finally{input.disabled=false;root.querySelector(".ri-send").disabled=false;input.focus();}
