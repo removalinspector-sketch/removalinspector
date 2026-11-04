@@ -98,3 +98,128 @@ body:not(:has(> header.top)) .announce b{color:#65ddb4}
   body:not(:has(> header.top)) section{padding:54px 0}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+
+/* Homepage light financial-services theme: retain the established blue and green brand */
+body:not(:has(> header.top)){
+  background:#f4f7fb!important;color:#24364b!important;
+}
+body:not(:has(> header.top))::before{opacity:.45}
+body:not(:has(> header.top))::after{opacity:.035!important}
+body:not(:has(> header.top)) header{
+  background:rgba(255,255,255,.96)!important;
+  border-bottom:1px solid #dfe7f0!important;
+  box-shadow:0 3px 18px rgba(22,47,77,.055);
+}
+body:not(:has(> header.top)) .brand-name .t1{color:#087f5b!important}
+body:not(:has(> header.top)) .brand-name .t2{color:#276cae!important}
+body:not(:has(> header.top)) .nav-links a{color:#52657a!important}
+body:not(:has(> header.top)) .nav-links a:hover{color:#17456f!important;background:#edf4fa!important}
+body:not(:has(> header.top)) .nav-links a.active{color:#087f5b!important}
+body:not(:has(> header.top)) .nav-phone{color:#52657a!important}
+body:not(:has(> header.top)) .hamburger{color:#24415e!important;border-color:#d9e3ed!important}
+body:not(:has(> header.top)) .announce{
+  background:linear-gradient(90deg,#e7f6ef,#eaf3fc,#e7f6ef)!important;
+  color:#53677d!important;border-bottom-color:#dce7ef!important;
+}
+body:not(:has(> header.top)) .announce b{color:#087f5b!important}
+body:not(:has(> header.top)) .hero{background:transparent!important}
+body:not(:has(> header.top)) .hero-title{color:#142b45!important}
+body:not(:has(> header.top)) .hero-sub{color:#52657a!important}
+body:not(:has(> header.top)) .hero-sub b{color:#203d5b!important}
+body:not(:has(> header.top)) .hero-trust{color:#63758a!important}
+body:not(:has(> header.top)) .wstep{color:#77879a!important}
+body:not(:has(> header.top)) .wstep.active{color:#087f5b!important}
+body:not(:has(> header.top)) .wstep .n{border-color:#9aabba!important}
+body:not(:has(> header.top)) .checker-label{color:#65778b!important}
+body:not(:has(> header.top)) .situ-card{
+  background:#fff!important;border-color:#dce5ee!important;
+  box-shadow:0 4px 14px rgba(24,51,79,.035);
+}
+body:not(:has(> header.top)) .situ-card:hover{background:#f5faff!important;border-color:#78aee0!important}
+body:not(:has(> header.top)) .situ-card.active{background:#eaf7f1!important;border-color:#20a879!important}
+body:not(:has(> header.top)) .situ-txt .t{color:#203b57!important}
+body:not(:has(> header.top)) .situ-txt .s{color:#718196!important}
+body:not(:has(> header.top)) .match-panel{
+  background:#fff!important;color:#24364b!important;border:1px solid #cfe0ef!important;
+  box-shadow:0 18px 42px rgba(27,58,91,.11)!important;
+}
+body:not(:has(> header.top)) .match-panel .match-empty{color:#738399!important}
+body:not(:has(> header.top)) .match-panel .match-empty .icon-box{background:#f1f6fa!important;border-color:#dce6ef!important;color:#6c8197!important}
+body:not(:has(> header.top)) .match-panel .match-empty .big{color:#29445f!important}
+body:not(:has(> header.top)) .match-panel .match-empty .small{color:#718196!important}
+body:not(:has(> header.top)) .match-panel .match-kit-tag{color:#276cae!important}
+body:not(:has(> header.top)) .match-panel .match-kit-name{color:#18334f!important}
+body:not(:has(> header.top)) .match-panel .match-kit-price .once{color:#718196!important}
+body:not(:has(> header.top)) .match-panel .conf-bar{background:#e7edf3!important}
+body:not(:has(> header.top)) .match-panel .match-count{background:#f1f5f9!important;color:#61758a!important;border-color:#dce5ee!important}
+body:not(:has(> header.top)) .match-panel .match-note{color:#718196!important}
+body:not(:has(> header.top)) .match-panel .panel-badge{background:#f2f6fa!important}
+body:not(:has(> header.top)) .match-panel .panel-badge .v{color:#203b57!important}
+body:not(:has(> header.top)) .match-panel .panel-badge .k{color:#738399!important}
+body:not(:has(> header.top)) .stats-strip{
+  background:#eaf1f7!important;border-top:1px solid #dce6ef!important;
+  border-bottom:1px solid #dce6ef!important;
+}
+body:not(:has(> header.top)) .stat .lbl,
+body:not(:has(> header.top)) .bureau-row .lbl{color:#65788d!important}
+body:not(:has(> header.top)) .bureau-row{border-top-color:#d7e2ec!important}
+body:not(:has(> header.top)) .bureau-row .bi{color:#52677e!important}
+body:not(:has(> header.top)) .sec-title{color:#18334f!important}
+body:not(:has(> header.top)) .sec-sub{color:#5b6e83!important}
+body:not(:has(> header.top)) .sec-eyebrow{color:#087f5b!important}
+body:not(:has(> header.top)) .tl-card,
+body:not(:has(> header.top)) .kit,
+body:not(:has(> header.top)) .about-cards,
+body:not(:has(> header.top)) .about-contact,
+body:not(:has(> header.top)) .info-card,
+body:not(:has(> header.top)) .faq-item{
+  background:#fff!important;border:1px solid #dfe7ef!important;
+  box-shadow:0 8px 24px rgba(22,47,77,.045)!important;
+}
+body:not(:has(> header.top)) .tl-card h3,
+body:not(:has(> header.top)) .kit h3,
+body:not(:has(> header.top)) .info-card h3{color:#1d3854!important}
+body:not(:has(> header.top)) .tl-card p,
+body:not(:has(> header.top)) .kit .kit-feats li,
+body:not(:has(> header.top)) .kit-foot{color:#5d7085!important}
+body:not(:has(> header.top)) .kit .kit-price{border-bottom-color:#e1e8ef!important}
+body:not(:has(> header.top)) .kit .kit-price .once{color:#718196!important}
+body:not(:has(> header.top)) .kit.featured{border-color:#20a879!important;box-shadow:0 0 0 1px rgba(32,168,121,.22),0 12px 30px rgba(22,47,77,.07)!important}
+body:not(:has(> header.top)) .kit-badge.pop{background:#087f5b!important;color:#fff!important}
+body:not(:has(> header.top)) .kit-badge.val{background:#276cae!important;color:#fff!important}
+body:not(:has(> header.top)) .kit-tag{color:#276cae!important}
+body:not(:has(> header.top)) .tl-card .day{color:#276cae!important;background:#eaf3fc!important}
+body:not(:has(> header.top)) .tl-dot{background:#fff!important}
+body:not(:has(> header.top)) .kits-toggle button{color:#53677d!important;border-color:#d7e2ec!important}
+body:not(:has(> header.top)) .kits-toggle button.active{background:#087f5b!important;color:#fff!important}
+body:not(:has(> header.top)) .compare-wrap{border-color:#dce5ee!important;background:#fff!important}
+body:not(:has(> header.top)) table.compare th,
+body:not(:has(> header.top)) table.compare td{color:#52677d!important;border-bottom-color:#e3eaf1!important}
+body:not(:has(> header.top)) table.compare thead th{background:#edf3f8!important;color:#1d3854!important}
+body:not(:has(> header.top)) .faq-q{color:#203b57!important}
+body:not(:has(> header.top)) .faq-a,
+body:not(:has(> header.top)) .faq-a-inner{color:#5b6e83!important}
+body:not(:has(> header.top)) .final-cta{
+  background:linear-gradient(120deg,#e7f5ef,#eaf3fc)!important;
+  border-top:1px solid #dce7ef!important;border-bottom:1px solid #dce7ef!important;
+}
+body:not(:has(> header.top)) .final-cta h2{color:#18334f!important}
+body:not(:has(> header.top)) .final-cta p{color:#53677d!important}
+body:not(:has(> header.top)) footer{background:#eaf0f6!important;color:#52677d!important;border-top:1px solid #dce5ee!important}
+body:not(:has(> header.top)) footer h4{color:#1d3854!important}
+body:not(:has(> header.top)) footer a,
+body:not(:has(> header.top)) .foot-contact{color:#53677d!important}
+body:not(:has(> header.top)) .foot-legal,
+body:not(:has(> header.top)) .foot-bottom{color:#718196!important;border-color:#d7e1eb!important}
+body:not(:has(> header.top)) .social-links{border-color:#d7e1eb!important}
+body:not(:has(> header.top)) .social-label{color:#61758a!important}
+body:not(:has(> header.top)) .mobile-cta{background:rgba(255,255,255,.97)!important;border-top:1px solid #dce5ee!important}
+body:not(:has(> header.top)) .btn-ghost{background:#fff!important;border:1px solid #cfdce8!important;color:#275078!important}
+body:not(:has(> header.top)) .btn-primary{background:linear-gradient(135deg,#16a875,#087f5b)!important;color:#fff!important}
+body:not(:has(> header.top)) .btn-blue{background:linear-gradient(135deg,#398bd0,#245f9e)!important;color:#fff!important}
+@media(max-width:760px){
+  body:not(:has(> header.top)) .nav-links{background:#fff!important;border-color:#dce5ee!important}
+  body:not(:has(> header.top)) .nav-links a{color:#425a73!important}
+  body:not(:has(> header.top)) .mobile-cta{box-shadow:0 -5px 20px rgba(22,47,77,.08)!important}
+}
