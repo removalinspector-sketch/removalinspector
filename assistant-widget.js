@@ -51,7 +51,7 @@
   const shell=root.querySelector(".ri-shell"), launch=root.querySelector(".ri-launch"), log=root.querySelector(".ri-log"), form=root.querySelector("form"), input=root.querySelector("textarea");
   const history=[];
   if(isPage){const title=document.createElement("div");title.innerHTML='<h1 style="color:#eaf2ff;font-size:clamp(28px,5vw,42px);margin:0 0 8px">Removal Inspector AI Assistant</h1><p style="color:#a9bad0;margin:0">Get clear, practical guidance about common South African credit-profile issues.</p>';root.prepend(title);shell.classList.add("ri-open");}
-  launch.addEventListener("click",()=>shell.classList.toggle("ri-open"));
+  launch.addEventListener("click",()=>{ window.location.href="/assistant/"; });
   root.querySelector(".ri-close").addEventListener("click",()=>shell.classList.remove("ri-open"));
   function add(text,who){const el=document.createElement("div");el.className="ri-msg "+(who==="user"?"ri-user":"ri-bot");el.textContent=text;log.appendChild(el);log.scrollTop=log.scrollHeight;return el;}
   function renderAssistant(el,reply){
