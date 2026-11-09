@@ -10,6 +10,7 @@
   .ri-shell.ri-open{display:flex}
   .ri-head{background:#142742;padding:16px 18px;border-bottom:1px solid #29415f;display:flex;justify-content:space-between;align-items:center}
   .ri-head strong{display:block;font-size:15px}.ri-head small{color:#a9bad0;font-size:12px}
+  .ri-language{margin-top:8px;background:#0b1728;color:#eaf2ff;border:1px solid #49617d;border-radius:8px;padding:6px 9px;font-size:12px;max-width:150px}
   .ri-close{border:0;background:transparent;color:#fff;font-size:25px;cursor:pointer}
   .ri-disclaimer{font-size:11px;line-height:1.45;color:#a9bad0;padding:9px 14px;background:#0c1728}
   .ri-log{padding:14px;overflow:auto;flex:1;display:flex;flex-direction:column;gap:10px}
@@ -36,19 +37,30 @@
   root.innerHTML = `
     <button class="ri-launch" type="button" aria-label="Open Removal Inspector assistant">Ask our AI assistant</button>
     <section class="ri-shell" aria-label="Removal Inspector AI assistant">
-      <header class="ri-head"><div><strong>Removal Inspector Assistant</strong><small>Credit-profile education · English · isiZulu · Afrikaans</small></div><button class="ri-close" type="button" aria-label="Close">×</button></header>
-      <div class="ri-disclaimer">Automated educational guidance only — not legal or debt-counselling advice. No guaranteed removals. Please do not share ID numbers, account numbers or credit reports.</div>
-      <div class="ri-log" aria-live="polite"><div class="ri-msg ri-bot">Welcome. I can help you understand a credit-profile issue and explain the relevant DIY guidance. What is happening with your credit profile?</div></div>
+      <header class="ri-head"><div><strong data-ri-title>Removal Inspector Assistant</strong><small data-ri-subtitle>Credit-profile education</small><label style="display:block;color:#c5d4e8;font-size:11px;margin-top:8px" for="ri-language">Choose your language</label><select class="ri-language" id="ri-language" aria-label="Choose your language"><option value="en">English</option><option value="zu">isiZulu</option><option value="af">Afrikaans</option></select></div><button class="ri-close" type="button" aria-label="Close">×</button></header>
+      <div class="ri-disclaimer" data-ri-disclaimer>Automated educational guidance only — not legal or debt-counselling advice. No guaranteed removals. Please do not share ID numbers, account numbers or credit reports.</div>
+      <div class="ri-log" aria-live="polite"><div class="ri-msg ri-bot" data-ri-welcome>Welcome. I can help you understand a credit-profile issue and explain the relevant DIY guidance. What is happening with your credit profile?</div></div>
       <div class="ri-quick">
-        <button type="button" data-prompt="I have finished paying my debts but I am still under debt review. What should I do?">Still under debt review</button>
-        <button type="button" data-prompt="I paid an account but it still shows as adverse on my credit profile.">Paid account still adverse</button>
-        <button type="button" data-prompt="I want to understand an old debt and whether it may be prescribed.">Old debt</button>
-        <button type="button" data-prompt="I have a judgment showing on my credit profile. What are my options?">Judgment</button>
+        <button type="button" data-prompt="I have finished paying my debts but I am still under debt review. What should I do?" data-label-en="Still under debt review" data-label-zu="Ngisengaphansi kwe-debt review" data-label-af="Ek is steeds onder skuldhersiening">Still under debt review</button>
+        <button type="button" data-prompt="I paid an account but it still shows as adverse on my credit profile." data-label-en="Paid account still adverse" data-label-zu="I-akhawunti ekhokhiwe isabonakala kabi" data-label-af="Betaalde rekening wys steeds negatief">Paid account still adverse</button>
+        <button type="button" data-prompt="I want to understand an old debt and whether it may be prescribed." data-label-en="Old debt" data-label-zu="Isikweletu esidala" data-label-af="Ou skuld">Old debt</button>
+        <button type="button" data-prompt="I have a judgment showing on my credit profile. What are my options?" data-label-en="Judgment" data-label-zu="Isinqumo senkantolo" data-label-af="Hofbevel">Judgment</button>
       </div>
       <form class="ri-form"><textarea rows="1" maxlength="1800" placeholder="Type your question…" aria-label="Your question"></textarea><button class="ri-send" type="submit">Send</button></form>
       <div class="ri-links"><a href="https://wa.me/27757931848" target="_blank" rel="noopener">Speak to human support on WhatsApp</a><a href="/assistant/">Full assistant page</a></div>
     </section>`;
   const shell=root.querySelector(".ri-shell"), launch=root.querySelector(".ri-launch"), log=root.querySelector(".ri-log"), form=root.querySelector("form"), input=root.querySelector("textarea");
+  const languageSelect=root.querySelector("#ri-language");
+  const uiText={
+    en:{subtitle:"Credit-profile education",choose:"Choose your language",disclaimer:"Automated educational guidance only — not legal or debt-counselling advice. No guaranteed removals. Please do not share ID numbers, account numbers or credit reports.",welcome:"Welcome. I can help you understand a credit-profile issue and explain the relevant DIY guidance. What is happening with your credit profile?",placeholder:"Type your question…",send:"Send",whatsapp:"Speak to human support on WhatsApp",full:"Full assistant page"},
+    zu:{subtitle:"Ulwazi lokuqonda umbiko wakho wesikweletu",choose:"Khetha ulimi lwakho",disclaimer:"Lolu usizo lolwazi kuphela oluzenzakalelayo — akusona iseluleko sezomthetho noma sokwelulekwa ngezikweletu. Asithembisi ukususwa kolwazi. Ungathumeli inombolo kamazisi, izinombolo zama-akhawunti noma umbiko wakho wesikweletu.",welcome:"Sawubona. Ngingakusiza uqonde inkinga ekumbiko wakho wesikweletu nezinyathelo ongazilandela. Yini ekukhathazayo ngombiko wakho wesikweletu?",placeholder:"Bhala umbuzo wakho…",send:"Thumela",whatsapp:"Khuluma nomuntu ku-WhatsApp",full:"Ikhasi lomsizi eligcwele"},
+    af:{subtitle:"Opvoedkundige kredietrekordinligting",choose:"Kies jou taal",disclaimer:"Outomatiese opvoedkundige leiding בלבד — nie regs- of skuldberadingsadvies nie. Geen verwydering word gewaarborg nie. Moet asseblief nie jou ID-nommer, rekeningnommers of kredietverslag deel nie.",welcome:"Welkom. Ek kan jou help om 'n probleem op jou kredietrekord te verstaan en die moontlike selfdoenstappe te verduidelik. Wat gebeur tans op jou kredietrekord?",placeholder:"Tik jou vraag…",send:"Stuur",whatsapp:"Praat met 'n medewerker op WhatsApp",full:"Volledige assistentbladsy"}
+  };
+  let selectedLanguage=localStorage.getItem("ri_chat_language")||"en";
+  if(!["en","zu","af"].includes(selectedLanguage))selectedLanguage="en";
+  function applyLanguage(lang){selectedLanguage=["en","zu","af"].includes(lang)?lang:"en";localStorage.setItem("ri_chat_language",selectedLanguage);languageSelect.value=selectedLanguage;const t=uiText[selectedLanguage];root.querySelector("[data-ri-subtitle]").textContent=t.subtitle;root.querySelector('label[for="ri-language"]').textContent=t.choose;root.querySelector("[data-ri-disclaimer]").textContent=t.disclaimer;const welcome=root.querySelector("[data-ri-welcome]");if(welcome)welcome.textContent=t.welcome;input.placeholder=t.placeholder;input.setAttribute("aria-label",t.placeholder);root.querySelector(".ri-send").textContent=t.send;root.querySelector(".ri-links a:first-child").textContent=t.whatsapp;root.querySelector(".ri-links a:last-child").textContent=t.full;root.querySelectorAll("[data-prompt]").forEach(b=>{const label=b.getAttribute("data-label-"+selectedLanguage);if(label)b.textContent=label;});}
+  languageSelect.addEventListener("change",()=>applyLanguage(languageSelect.value));
+  applyLanguage(selectedLanguage);
   let riConsent=localStorage.getItem("ri_analytics_consent")==="yes";
   let riSession=localStorage.getItem("ri_analytics_session");
   if(!riSession){riSession=(crypto.randomUUID?crypto.randomUUID():("xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,x=>{const r=Math.random()*16|0;return(x==="x"?r:(r&3|8)).toString(16)})));localStorage.setItem("ri_analytics_session",riSession);}
@@ -83,7 +95,7 @@
     add(clean,"user");history.push({role:"user",content:clean});input.value="";input.disabled=true;root.querySelector(".ri-send").disabled=true;
     const pending=add("Thinking…","assistant");
     try{
-      const res=await fetch("/api/assistant",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({messages:history.slice(-10),analyticsConsent:riConsent,sessionId:riSession,language:(/\\b(ngiyabonga|ngicela|isikweletu|yini|ngifuna)\\b/i.test(history.map(x=>x.content).join(" "))?"zu":/\\b(dankie|kredietrekord|skuld|ek wil|wat het)\\b/i.test(history.map(x=>x.content).join(" "))?"af":"en")})});
+      const res=await fetch("/api/assistant",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({messages:history.slice(-10),analyticsConsent:riConsent,sessionId:riSession,language:selectedLanguage})});
       const data=await res.json();if(data.reply)renderAssistant(pending,data.reply);else pending.textContent=data.error||"Sorry, I could not respond. Please contact WhatsApp support.";
       if(data.reply)history.push({role:"assistant",content:data.reply});
     }catch(e){pending.textContent="The assistant is temporarily unavailable. Please contact WhatsApp support at 075 793 1848.";}
