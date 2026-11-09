@@ -49,6 +49,17 @@
       <div class="ri-links"><a href="https://wa.me/27757931848" target="_blank" rel="noopener">Speak to human support on WhatsApp</a><a href="/assistant/">Full assistant page</a></div>
     </section>`;
   const shell=root.querySelector(".ri-shell"), launch=root.querySelector(".ri-launch"), log=root.querySelector(".ri-log"), form=root.querySelector("form"), input=root.querySelector("textarea");
+  let riConsent=localStorage.getItem("ri_analytics_consent")==="yes";
+  let riSession=localStorage.getItem("ri_analytics_session");
+  if(!riSession){riSession=(crypto.randomUUID?crypto.randomUUID():("xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,x=>{const r=Math.random()*16|0;return(x==="x"?r:(r&3|8)).toString(16)})));localStorage.setItem("ri_analytics_session",riSession);}
+  const consentBox=document.createElement("div");
+  consentBox.style.cssText="padding:10px 14px;background:#10243a;border-top:1px solid #29415f;font-size:11px;line-height:1.45;color:#c5d4e8";
+  consentBox.innerHTML='<span>Help improve this assistant? You can allow anonymous usage statistics. No chat messages, ID numbers or credit-report details are stored.</span><div style="display:flex;gap:8px;margin-top:8px"><button type="button" data-ri-consent="yes" style="background:#20c997;color:#06251f;border:0;border-radius:7px;padding:6px 10px;font-weight:700">Allow</button><button type="button" data-ri-consent="no" style="background:#243b56;color:#fff;border:0;border-radius:7px;padding:6px 10px">No thanks</button></div>';
+  shell.insertBefore(consentBox,shell.querySelector(".ri-log"));
+  function setRiConsent(value){riConsent=value;localStorage.setItem("ri_analytics_consent",value?"yes":"no");consentBox.innerHTML=value?"Anonymous analytics enabled. No chat content is stored.":"Anonymous analytics disabled. You can still use the assistant normally.";}
+  consentBox.querySelector('[data-ri-consent="yes"]').addEventListener("click",()=>setRiConsent(true));
+  consentBox.querySelector('[data-ri-consent="no"]').addEventListener("click",()=>setRiConsent(false));
+
   const history=[];
   if(isPage){const title=document.createElement("div");title.innerHTML='<h1 style="color:#eaf2ff;font-size:clamp(28px,5vw,42px);margin:0 0 8px">Removal Inspector AI Assistant</h1><p style="color:#a9bad0;margin:0">Get clear, practical guidance about common South African credit-profile issues.</p>';root.prepend(title);shell.classList.add("ri-open");}
   launch.addEventListener("click",()=>{ window.location.href="/assistant/"; });
@@ -72,7 +83,7 @@
     add(clean,"user");history.push({role:"user",content:clean});input.value="";input.disabled=true;root.querySelector(".ri-send").disabled=true;
     const pending=add("Thinking…","assistant");
     try{
-      const res=await fetch("/api/assistant",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({messages:history.slice(-10)})});
+      const res=await fetch("/api/assistant",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({messages:history.slice(-10),analyticsConsent:riConsent,sessionId:riSession,language:(/\\b(ngiyabonga|ngicela|isikweletu|yini|ngifuna)\\b/i.test(history.map(x=>x.content).join(" "))?"zu":/\\b(dankie|kredietrekord|skuld|ek wil|wat het)\\b/i.test(history.map(x=>x.content).join(" "))?"af":"en")})});
       const data=await res.json();if(data.reply)renderAssistant(pending,data.reply);else pending.textContent=data.error||"Sorry, I could not respond. Please contact WhatsApp support.";
       if(data.reply)history.push({role:"assistant",content:data.reply});
     }catch(e){pending.textContent="The assistant is temporarily unavailable. Please contact WhatsApp support at 075 793 1848.";}
