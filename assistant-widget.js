@@ -66,11 +66,22 @@
   if(!riSession){riSession=(crypto.randomUUID?crypto.randomUUID():("xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,x=>{const r=Math.random()*16|0;return(x==="x"?r:(r&3|8)).toString(16)})));localStorage.setItem("ri_analytics_session",riSession);}
   const consentBox=document.createElement("div");
   consentBox.style.cssText="padding:10px 14px;background:#10243a;border-top:1px solid #29415f;font-size:11px;line-height:1.45;color:#c5d4e8";
-  consentBox.innerHTML='<span>Optional analytics: Allow records limited usage statistics (such as language, session events and product category), not chat text. Your messages are still sent to our AI service to generate replies. Read the <a href="/privacy-policy/" target="_blank" rel="noopener" style="color:#67e3c1">Privacy Policy</a>. You can choose “No thanks” and still use the assistant.</span><div style="display:flex;gap:8px;margin-top:8px"><button type="button" data-ri-consent="yes" style="background:#20c997;color:#06251f;border:0;border-radius:7px;padding:6px 10px;font-weight:700">Allow</button><button type="button" data-ri-consent="no" style="background:#243b56;color:#fff;border:0;border-radius:7px;padding:6px 10px">No thanks</button></div>'
   shell.insertBefore(consentBox,shell.querySelector(".ri-log"));
-  function setRiConsent(value){riConsent=value;localStorage.setItem("ri_analytics_consent",value?"yes":"no");consentBox.innerHTML=value?"Anonymous analytics enabled. No chat content is stored.":"Anonymous analytics disabled. You can still use the assistant normally.";}
-  consentBox.querySelector('[data-ri-consent="yes"]').addEventListener("click",()=>setRiConsent(true));
-  consentBox.querySelector('[data-ri-consent="no"]').addEventListener("click",()=>setRiConsent(false));
+  function renderConsent(showPrompt=false){
+    const saved=localStorage.getItem("ri_analytics_consent");
+    if(!showPrompt&&(saved==="yes"||saved==="no")){
+      consentBox.innerHTML='<span>Optional analytics: '+(saved==="yes"?'enabled. Limited usage events are recorded; chat text is not stored in this analytics database.':'disabled. No optional assistant analytics events are recorded.')+'</span><div style="margin-top:8px"><button type="button" data-ri-change style="background:#243b56;color:#fff;border:0;border-radius:7px;padding:6px 10px">Change privacy choice</button> <a href="/privacy-policy/" target="_blank" rel="noopener" style="color:#67e3c1">Privacy Policy</a></div>';
+    }else{
+      consentBox.innerHTML='<span>Optional analytics: Allow records limited usage statistics (such as language, session events and product category), not chat text. Your messages are still sent to our AI service to generate replies. Read the <a href="/privacy-policy/" target="_blank" rel="noopener" style="color:#67e3c1">Privacy Policy</a>. You can choose “No thanks” and still use the assistant.</span><div style="display:flex;gap:8px;margin-top:8px"><button type="button" data-ri-consent="yes" style="background:#20c997;color:#06251f;border:0;border-radius:7px;padding:6px 10px;font-weight:700">Allow</button><button type="button" data-ri-consent="no" style="background:#243b56;color:#fff;border:0;border-radius:7px;padding:6px 10px">No thanks</button></div>';
+    }
+  }
+  function setRiConsent(value){riConsent=value;localStorage.setItem("ri_analytics_consent",value?"yes":"no");renderConsent(false);}
+  consentBox.addEventListener("click",event=>{
+    const choice=event.target.closest("[data-ri-consent]");
+    if(choice){setRiConsent(choice.dataset.riConsent==="yes");return;}
+    if(event.target.closest("[data-ri-change]"))renderConsent(true);
+  });
+  renderConsent();
 
   const history=[];
   if(isPage){const title=document.createElement("div");title.innerHTML='<h1 style="color:#eaf2ff;font-size:clamp(28px,5vw,42px);margin:0 0 8px">Removal Inspector AI Assistant</h1><p style="color:#a9bad0;margin:0">Get clear, practical guidance about common South African credit-profile issues.</p>';root.prepend(title);shell.classList.add("ri-open");}
