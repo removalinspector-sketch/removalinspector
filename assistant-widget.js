@@ -13,7 +13,7 @@
   .ri-language{margin-top:8px;background:#0b1728;color:#eaf2ff;border:1px solid #49617d;border-radius:8px;padding:6px 9px;font-size:12px;max-width:150px}
   .ri-close{border:0;background:transparent;color:#fff;font-size:25px;cursor:pointer}
   .ri-disclaimer{font-size:11px;line-height:1.45;color:#a9bad0;padding:9px 14px;background:#0c1728}
-  .ri-log{padding:14px;overflow:auto;flex:1;display:flex;flex-direction:column;gap:10px}
+  .ri-log{padding:14px;overflow:auto;flex:1;min-height:0;display:flex;flex-direction:column;gap:10px}
   .ri-msg{max-width:88%;padding:10px 12px;border-radius:13px;font-size:13px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
   .ri-bot{align-self:flex-start;background:#1b304c;color:#edf5ff;border-bottom-left-radius:4px}
   .ri-user{align-self:flex-end;background:#176d5a;color:white;border-bottom-right-radius:4px}
@@ -65,14 +65,14 @@
   let riSession=localStorage.getItem("ri_analytics_session");
   if(!riSession){riSession=(crypto.randomUUID?crypto.randomUUID():("xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,x=>{const r=Math.random()*16|0;return(x==="x"?r:(r&3|8)).toString(16)})));localStorage.setItem("ri_analytics_session",riSession);}
   const consentBox=document.createElement("div");
-  consentBox.style.cssText="padding:10px 14px;background:#10243a;border-top:1px solid #29415f;font-size:11px;line-height:1.45;color:#c5d4e8";
-  shell.insertBefore(consentBox,shell.querySelector(".ri-log"));
+  consentBox.style.cssText="flex:0 0 auto;max-height:112px;overflow:auto;padding:7px 12px;background:#0c1728;border-top:1px solid #29415f;font-size:10px;line-height:1.35;color:#a9bad0";
+  shell.appendChild(consentBox);
   function renderConsent(showPrompt=false){
     const saved=localStorage.getItem("ri_analytics_consent");
     if(!showPrompt&&(saved==="yes"||saved==="no")){
-      consentBox.innerHTML='<span>Optional analytics: '+(saved==="yes"?'enabled. Limited usage events are recorded; chat text is not stored in this analytics database.':'disabled. No optional assistant analytics events are recorded.')+'</span><div style="margin-top:8px"><button type="button" data-ri-change style="background:#243b56;color:#fff;border:0;border-radius:7px;padding:6px 10px">Change privacy choice</button> <a href="/privacy-policy/" target="_blank" rel="noopener" style="color:#67e3c1">Privacy Policy</a></div>';
+      consentBox.innerHTML='<span>Optional analytics: '+(saved==="yes"?'on — limited usage events only; chat text is not stored in analytics.':'off — no optional assistant analytics events are recorded.')+'</span><div style="margin-top:5px"><button type="button" data-ri-change style="background:#243b56;color:#fff;border:0;border-radius:7px;padding:5px 8px;font-size:10px">Privacy settings</button> <a href="/privacy-policy/" target="_blank" rel="noopener" style="color:#67e3c1">Privacy Policy</a></div>';
     }else{
-      consentBox.innerHTML='<span>Optional analytics: Allow records limited usage statistics (such as language, session events and product category), not chat text. Your messages are still sent to our AI service to generate replies. Read the <a href="/privacy-policy/" target="_blank" rel="noopener" style="color:#67e3c1">Privacy Policy</a>. You can choose “No thanks” and still use the assistant.</span><div style="display:flex;gap:8px;margin-top:8px"><button type="button" data-ri-consent="yes" style="background:#20c997;color:#06251f;border:0;border-radius:7px;padding:6px 10px;font-weight:700">Allow</button><button type="button" data-ri-consent="no" style="background:#243b56;color:#fff;border:0;border-radius:7px;padding:6px 10px">No thanks</button></div>';
+      consentBox.innerHTML='<span>Optional analytics only: language, session events and product category — never chat text. Your messages are sent to the AI service to generate replies. Choosing “No thanks” does not block chat. <a href="/privacy-policy/" target="_blank" rel="noopener" style="color:#67e3c1">Privacy Policy</a></span><div style="display:flex;gap:7px;margin-top:6px"><button type="button" data-ri-consent="yes" style="background:#20c997;color:#06251f;border:0;border-radius:7px;padding:5px 9px;font-size:10px;font-weight:700">Allow analytics</button><button type="button" data-ri-consent="no" style="background:#243b56;color:#fff;border:0;border-radius:7px;padding:5px 9px;font-size:10px">No thanks</button></div>';
     }
   }
   function setRiConsent(value){riConsent=value;localStorage.setItem("ri_analytics_consent",value?"yes":"no");renderConsent(false);}
