@@ -13,15 +13,15 @@
   .ri-language{margin-top:8px;background:#0b1728;color:#eaf2ff;border:1px solid #49617d;border-radius:8px;padding:6px 9px;font-size:12px;max-width:150px}
   .ri-close{border:0;background:transparent;color:#fff;font-size:25px;cursor:pointer}
   .ri-disclaimer{font-size:11px;line-height:1.45;color:#a9bad0;padding:9px 14px;background:#0c1728}
-  .ri-log{padding:14px;overflow:auto;flex:1;min-height:0;display:flex;flex-direction:column;gap:10px}
-  .ri-msg{max-width:88%;padding:10px 12px;border-radius:13px;font-size:13px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
-  .ri-bot{align-self:flex-start;background:#1b304c;color:#edf5ff;border-bottom-left-radius:4px}
-  .ri-user{align-self:flex-end;background:#176d5a;color:white;border-bottom-right-radius:4px}
+  .ri-log{padding:16px;overflow-y:auto;overflow-x:hidden;flex:1 1 0;min-height:180px;display:flex;flex-direction:column;gap:12px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+  .ri-msg{max-width:94%;width:fit-content;padding:13px 15px;border-radius:16px;font-size:16px;line-height:1.6;font-weight:400;white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal;letter-spacing:.01em}
+  .ri-bot{align-self:flex-start;background:#e9f5ee;color:#172b22;border-bottom-left-radius:5px}
+  .ri-user{align-self:flex-end;background:#d9fdd3;color:#173b20;border-bottom-right-radius:5px}
   .ri-quick{display:flex;flex-wrap:wrap;gap:6px;padding:0 12px 10px}
   .ri-quick button{background:#172c47;color:#dceaff;border:1px solid #36516f;border-radius:20px;padding:7px 10px;font-size:11px;cursor:pointer}
-  .ri-form{display:flex;gap:8px;padding:12px;border-top:1px solid #29415f}
-  .ri-form textarea{resize:none;min-height:42px;max-height:100px;flex:1;border-radius:10px;border:1px solid #39536f;background:#0b1728;color:#fff;padding:10px;font:inherit;font-size:13px}
-  .ri-send{border:0;border-radius:10px;background:#20c997;color:#06251f;font-weight:800;padding:0 15px;cursor:pointer}
+  .ri-form{display:flex;align-items:flex-end;gap:9px;padding:12px;border-top:1px solid #29415f;background:#101c31;flex:0 0 auto}
+  .ri-form textarea{resize:vertical;min-height:48px;max-height:130px;flex:1;border-radius:18px;border:1px solid #aab8b0;background:#fff;color:#172b22;padding:12px 15px;font:inherit;font-size:16px;line-height:1.45}
+  .ri-send{border:0;border-radius:18px;background:#20c997;color:#06251f;font-size:15px;font-weight:800;padding:0 17px;min-height:48px;cursor:pointer}
   .ri-links{padding:0 12px 12px;font-size:12px;display:flex;justify-content:space-between;gap:10px}
   .ri-links a{color:#67e3c1;text-decoration:none}
   .ri-whatsapp-action{display:inline-flex;align-items:center;justify-content:center;gap:9px;margin-top:10px;padding:13px 18px;min-height:46px;border-radius:10px;background:#20c997;color:#06251f!important;font-size:14px;font-weight:800;text-decoration:none!important;box-shadow:0 5px 18px #0003}
@@ -29,13 +29,17 @@
   .ri-whatsapp-action svg{width:19px;height:19px;fill:currentColor;flex:none}
   .ri-page{max-width:900px;margin:40px auto;padding:0 18px}
   .ri-page .ri-shell{position:relative;right:auto;bottom:auto;width:100%;height:min(680px,calc(100dvh - 190px));min-height:420px;max-height:none;display:flex;margin-top:22px;overflow:hidden}
-  .ri-page .ri-log{flex:1 1 auto;min-height:0;overscroll-behavior:contain;scroll-behavior:smooth}
+  .ri-page .ri-log{flex:1 1 0;min-height:180px;overscroll-behavior:contain;scroll-behavior:smooth}
   .ri-page .ri-form,.ri-page .ri-links,.ri-page .ri-quick,.ri-page .ri-disclaimer,.ri-page .ri-head,.ri-page #ri-assistant-root>div{flex-shrink:0}
-  .ri-shell .ri-msg{white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal;max-width:92%}
+  .ri-shell .ri-msg{white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal;max-width:96%;font-size:16px;line-height:1.6}
   .ri-shell .ri-form textarea{min-width:0;width:100%;min-height:44px;max-height:120px;line-height:1.4;overflow-y:auto}
   .ri-shell .ri-send{min-height:44px;flex:0 0 auto}
   .ri-page .ri-launch{display:none}
   @media(max-width:520px){
+    .ri-shell .ri-msg{max-width:98%;font-size:16px;line-height:1.6;padding:13px 14px}
+    .ri-shell .ri-log{padding:12px;gap:11px}
+    .ri-shell .ri-form textarea{font-size:16px;min-height:48px}
+    .ri-shell .ri-quick button{font-size:12px;padding:8px 11px}
     .ri-shell{right:10px;bottom:76px;width:calc(100vw - 20px);height:calc(100dvh - 90px);max-height:calc(100dvh - 90px);border-radius:16px}
     .ri-launch{right:12px;bottom:12px}
     .ri-page{margin:12px auto;padding:0 10px}
