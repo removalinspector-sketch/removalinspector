@@ -28,9 +28,9 @@
   .ri-whatsapp-action:hover{filter:brightness(1.06)}
   .ri-whatsapp-action svg{width:19px;height:19px;fill:currentColor;flex:none}
   .ri-page{max-width:900px;margin:40px auto;padding:0 18px}
-  .ri-page .ri-shell{position:relative;right:auto;bottom:auto;width:100%;height:min(680px,calc(100dvh - 190px));min-height:420px;max-height:none;display:flex;margin-top:22px;overflow:hidden}
-  .ri-page .ri-log{flex:1 1 0;min-height:180px;overscroll-behavior:contain;scroll-behavior:smooth}
-  .ri-page .ri-form,.ri-page .ri-links,.ri-page .ri-quick,.ri-page .ri-disclaimer,.ri-page .ri-head,.ri-page #ri-assistant-root>div{flex-shrink:0}
+  .ri-page .ri-shell{position:relative;right:auto;bottom:auto;width:100%;height:calc(100dvh - 170px);min-height:0;max-height:none;display:flex;margin-top:18px;overflow:hidden}
+  .ri-page .ri-log{flex:1 1 0;min-height:0;overscroll-behavior:contain;scroll-behavior:smooth}
+  .ri-page .ri-form,.ri-page .ri-links,.ri-page .ri-quick,.ri-page .ri-disclaimer,.ri-page .ri-head,.ri-page #ri-assistant-root>div,.ri-page .ri-shell>div:last-child{flex:0 0 auto;min-height:0}
   .ri-shell .ri-msg{white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal;max-width:96%;font-size:16px;line-height:1.6}
   .ri-shell .ri-form textarea{min-width:0;width:100%;min-height:44px;max-height:120px;line-height:1.4;overflow-y:auto}
   .ri-shell .ri-send{min-height:44px;flex:0 0 auto}
@@ -43,19 +43,19 @@
     .ri-shell{right:10px;bottom:76px;width:calc(100vw - 20px);height:calc(100dvh - 90px);max-height:calc(100dvh - 90px);border-radius:16px}
     .ri-launch{right:12px;bottom:12px}
     .ri-page{margin:12px auto;padding:0 10px}
-    .ri-page .ri-shell{height:calc(100dvh - 175px);min-height:360px;max-height:none;margin-top:14px}
-    .ri-page .ri-log{padding:12px}
+    .ri-page .ri-shell{height:calc(100dvh - 145px);min-height:0;max-height:none;margin-top:12px}
+    .ri-page .ri-log{padding:12px;min-height:0}
     .ri-page .ri-head{padding:12px}
     .ri-page .ri-disclaimer{padding:7px 10px}
     .ri-page .ri-quick{padding:0 10px 8px}
     .ri-page .ri-form{padding:9px}
     .ri-page .ri-links{padding:0 10px 9px;flex-wrap:wrap}
     .ri-page .ri-links a{font-size:11px}
-    .ri-page .ri-page-title{display:none}
+    .ri-page .ri-page-title{display:block}
   }
   @media(max-height:560px){
     .ri-shell{height:calc(100dvh - 78px);bottom:68px}
-    .ri-page .ri-shell{height:calc(100dvh - 125px);min-height:300px}
+    .ri-page .ri-shell{height:calc(100dvh - 110px);min-height:0}
     .ri-disclaimer{max-height:54px;overflow:auto}
   }
   `;
@@ -92,7 +92,7 @@
   let riSession=localStorage.getItem("ri_analytics_session");
   if(!riSession){riSession=(crypto.randomUUID?crypto.randomUUID():("xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,x=>{const r=Math.random()*16|0;return(x==="x"?r:(r&3|8)).toString(16)})));localStorage.setItem("ri_analytics_session",riSession);}
   const consentBox=document.createElement("div");
-  consentBox.style.cssText="flex:0 0 auto;max-height:112px;overflow:auto;padding:7px 12px;background:#0c1728;border-top:1px solid #29415f;font-size:10px;line-height:1.35;color:#a9bad0";
+  consentBox.style.cssText="flex:0 0 auto;max-height:none;overflow:visible;padding:7px 12px;background:#0c1728;border-top:1px solid #29415f;font-size:10px;line-height:1.35;color:#a9bad0";
   shell.appendChild(consentBox);
   function renderConsent(showPrompt=false){
     const saved=localStorage.getItem("ri_analytics_consent");
