@@ -129,61 +129,39 @@
     el.appendChild(document.createElement("br"));el.appendChild(button);
     requestAnimationFrame(()=>{log.scrollTop=log.scrollHeight;});
   }
-  // Four-by-four consultative intake: one question per turn, then reflect and recommend.
+  // Four-by-four consultative intake: problem, motivation, previous attempts, consequences.
+  // The opening welcome asks about the problem; each subsequent turn asks one question.
   const intakeQuestions = {
-    en: [
-      "What made you look into this now?",
-      "What have you already tried — for example, contacting the creditor, debt counsellor or credit bureau?",
-      "If this remains unresolved, what is the main difficulty it causes for you?",
-      "Thank you. I have the four key details. May I summarise what I understand and suggest the most relevant next step?"
-    ],
-    zu: [
-      "Yini ekwenze wafuna ukulungisa le ndaba manje?",
-      "Yini osuke wayizama kuze kube manje — njengokuxhumana nomkweletisi, umeluleki wezikweletu noma i-credit bureau?",
-      "Uma le nkinga ingalungiseki, ikuphi ubunzima obukhulu ekudalela bona?",
-      "Ngiyabonga. Senginolwazi olubalulekile. Ngingafingqa engikuzwile bese ngiphakamisa isinyathelo esifanele?"
-    ],
-    af: [
-      "Wat het jou laat besluit om dit nou aan te spreek?",
-      "Wat het jy reeds probeer — byvoorbeeld om die krediteur, skuldberader of kredietburo te kontak?",
-      "As dit nie opgelos word nie, wat is die grootste probleem wat dit vir jou veroorsaak?",
-      "Dankie. Ek het nou die vier belangrike besonderhede. Mag ek opsom wat ek verstaan en die toepaslike volgende stap voorstel?"
-    ]
+    en: ["What made you look into this now?","What have you already tried — for example, contacting the creditor, debt counsellor or credit bureau?","If this remains unresolved, what is the main difficulty it causes for you?"],
+    zu: ["Yini ekwenze wafuna ukulungisa le ndaba manje?","Yini osuke wayizama kuze kube manje — njengokuxhumana nomkweletisi, umeluleki wezikweletu noma i-credit bureau?","Uma le nkinga ingalungiseki, ikuphi ubunzima obukhulu ekudalela bona?"],
+    af: ["Wat het jou laat besluit om dit nou aan te spreek?","Wat het jy reeds probeer — byvoorbeeld om die krediteur, skuldberader of kredietburo te kontak?","As dit nie opgelos word nie, wat is die grootste probleem wat dit vir jou veroorsaak?"]
   };
   let intakeStep = 0;
   let intakeStarted = false;
-  function addHistory(role, content){history.push({role,content});}
+  function addHistory(role,content){history.push({role,content});}
   async function send(text){
     const clean=text.trim();if(!clean)return;
     add(clean,"user");addHistory("user",clean);input.value="";
     input.disabled=true;root.querySelector(".ri-send").disabled=true;
-    // The opening welcome / quick prompts establish Question 1 (the problem).
-    // Ask only one follow-up at a time and wait for the customer's answer.
     if(!intakeStarted){
+      // Customer's first answer is Question 1: the problem.
       intakeStarted=true;
-      intakeStep=0;
-    } else if(intakeStep < 4){
-      const nextQuestion=intakeQuestions[selectedLanguage][intakeStep];
-      addHistory("assistant",nextQuestion);
-      add(nextQuestion,"assistant");
-      intakeStep++;
-      input.disabled=false;root.querySelector(".ri-send").disabled=false;input.focus();
-      return;
+      const question=intakeQuestions[selectedLanguage][0];
+      addHistory("assistant",question);add(question,"assistant");intakeStep=1;
+      input.disabled=false;root.querySelector(".ri-send").disabled=false;input.focus();return;
     }
-    // After the four diagnostic questions, send the full conversation for a
-    // concise reflection and a relevant, permission-based recommendation.
-    if(intakeStep===4){
-      const permissionText=clean.toLowerCase();
-      const affirmative=/^(yes|yeah|yep|sure|please|go ahead|okay|ok|yebo|ngicela|ja|asseblief|goed|sure)$/i.test(permissionText);
-      if(!affirmative){
-        const prompt={
-          en:"Please reflect the customer's four answers in a short summary. Do not ask another diagnostic question. Explain the most relevant educational next step, state what the customer would need to do themselves, avoid guarantees, and ask whether they want details about the relevant DIY guidance.",
-          zu:"Fingqa kafushane izimpendulo ezine zekhasimende. Ungabuzi omunye umbuzo wokuxilonga. Chaza isinyathelo solwazi esifanele, cacisa ukuthi ikhasimende kufanele lenzeni ngokwalo, ungathembisi imiphumela, bese ubuza ukuthi liyafuna yini imininingwane yosizo lwe-DIY olufanele.",
-          af:"Sommeer die kliënt se vier antwoorde kortliks. Moenie nog 'n diagnostiese vraag vra nie. Verduidelik die toepaslike opvoedkundige volgende stap, sê wat die kliënt self moet doen, moenie resultate waarborg nie, en vra of hulle besonderhede oor die toepaslike selfdoenleiding wil hê."
-        }[selectedLanguage];
-        addHistory("user",prompt);
-      }
+    if(intakeStep<3){
+      const question=intakeQuestions[selectedLanguage][intakeStep];
+      addHistory("assistant",question);add(question,"assistant");intakeStep++;
+      input.disabled=false;root.querySelector(".ri-send").disabled=false;input.focus();return;
     }
+    // Four answers collected. Now reflect, diagnose and ask permission before any offer.
+    const instruction={
+      en:"The customer has answered the four-by-four diagnostic questions: (1) their problem, (2) why they are addressing it now, (3) what they have already tried, and (4) the consequence if it remains unresolved. Do not ask more diagnostic questions. Briefly reflect their situation accurately, identify any missing information without guessing, explain the most relevant educational next step, clearly state what they must do themselves, make no guarantees, and ask permission before explaining a relevant DIY kit or service. Do not pressure them.",
+      zu:"Ikhasimende seliphendule imibuzo emine yokuxilonga: (1) inkinga yalo, (2) ukuthi kungani liyilungisa manje, (3) elikuzamile, kanye (4) nomphumela uma ingaxazululeki. Ungabuzi eminye imibuzo yokuxilonga. Fingqa isimo salo ngokunembile, ungacabangi ngolwazi olungekho, chaza isinyathelo solwazi esifanele, cacisa ukuthi yini okufanele liyenze ngokwalo, ungathembisi miphumela, bese ucela imvume ngaphambi kokuchaza ikhithi ye-DIY noma isevisi efanele. Ungalifaki ingcindezi.",
+      af:"Die kliënt het die vier diagnostiese vrae beantwoord: (1) die probleem, (2) waarom hulle dit nou aanspreek, (3) wat hulle reeds probeer het, en (4) die gevolg indien dit onopgelos bly. Moenie verdere diagnostiese vrae vra nie. Som hul situasie akkuraat op, moenie ontbrekende feite raai nie, verduidelik die toepaslike opvoedkundige volgende stap, stel duidelik wat hulle self moet doen, waarborg geen resultate nie, en vra toestemming voordat jy 'n toepaslike selfdoenstel of diens verduidelik. Moenie druk uitoefen nie."
+    }[selectedLanguage];
+    addHistory("user",instruction);
     const pending=add("Thinking…","assistant");
     try{
       const res=await fetch("/api/assistant",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({messages:history.slice(-14),analyticsConsent:riConsent,sessionId:riSession,language:selectedLanguage})});
