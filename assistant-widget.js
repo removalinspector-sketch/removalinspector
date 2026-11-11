@@ -129,14 +129,66 @@
     el.appendChild(document.createElement("br"));el.appendChild(button);
     requestAnimationFrame(()=>{log.scrollTop=log.scrollHeight;});
   }
+  // Four-by-four consultative intake: one question per turn, then reflect and recommend.
+  const intakeQuestions = {
+    en: [
+      "What made you look into this now?",
+      "What have you already tried — for example, contacting the creditor, debt counsellor or credit bureau?",
+      "If this remains unresolved, what is the main difficulty it causes for you?",
+      "Thank you. I have the four key details. May I summarise what I understand and suggest the most relevant next step?"
+    ],
+    zu: [
+      "Yini ekwenze wafuna ukulungisa le ndaba manje?",
+      "Yini osuke wayizama kuze kube manje — njengokuxhumana nomkweletisi, umeluleki wezikweletu noma i-credit bureau?",
+      "Uma le nkinga ingalungiseki, ikuphi ubunzima obukhulu ekudalela bona?",
+      "Ngiyabonga. Senginolwazi olubalulekile. Ngingafingqa engikuzwile bese ngiphakamisa isinyathelo esifanele?"
+    ],
+    af: [
+      "Wat het jou laat besluit om dit nou aan te spreek?",
+      "Wat het jy reeds probeer — byvoorbeeld om die krediteur, skuldberader of kredietburo te kontak?",
+      "As dit nie opgelos word nie, wat is die grootste probleem wat dit vir jou veroorsaak?",
+      "Dankie. Ek het nou die vier belangrike besonderhede. Mag ek opsom wat ek verstaan en die toepaslike volgende stap voorstel?"
+    ]
+  };
+  let intakeStep = 0;
+  let intakeStarted = false;
+  function addHistory(role, content){history.push({role,content});}
   async function send(text){
     const clean=text.trim();if(!clean)return;
-    add(clean,"user");history.push({role:"user",content:clean});input.value="";input.disabled=true;root.querySelector(".ri-send").disabled=true;
+    add(clean,"user");addHistory("user",clean);input.value="";
+    input.disabled=true;root.querySelector(".ri-send").disabled=true;
+    // The opening welcome / quick prompts establish Question 1 (the problem).
+    // Ask only one follow-up at a time and wait for the customer's answer.
+    if(!intakeStarted){
+      intakeStarted=true;
+      intakeStep=0;
+    } else if(intakeStep < 4){
+      const nextQuestion=intakeQuestions[selectedLanguage][intakeStep];
+      addHistory("assistant",nextQuestion);
+      add(nextQuestion,"assistant");
+      intakeStep++;
+      input.disabled=false;root.querySelector(".ri-send").disabled=false;input.focus();
+      return;
+    }
+    // After the four diagnostic questions, send the full conversation for a
+    // concise reflection and a relevant, permission-based recommendation.
+    if(intakeStep===4){
+      const permissionText=clean.toLowerCase();
+      const affirmative=/^(yes|yeah|yep|sure|please|go ahead|okay|ok|yebo|ngicela|ja|asseblief|goed|sure)$/i.test(permissionText);
+      if(!affirmative){
+        const prompt={
+          en:"Please reflect the customer's four answers in a short summary. Do not ask another diagnostic question. Explain the most relevant educational next step, state what the customer would need to do themselves, avoid guarantees, and ask whether they want details about the relevant DIY guidance.",
+          zu:"Fingqa kafushane izimpendulo ezine zekhasimende. Ungabuzi omunye umbuzo wokuxilonga. Chaza isinyathelo solwazi esifanele, cacisa ukuthi ikhasimende kufanele lenzeni ngokwalo, ungathembisi imiphumela, bese ubuza ukuthi liyafuna yini imininingwane yosizo lwe-DIY olufanele.",
+          af:"Sommeer die kliënt se vier antwoorde kortliks. Moenie nog 'n diagnostiese vraag vra nie. Verduidelik die toepaslike opvoedkundige volgende stap, sê wat die kliënt self moet doen, moenie resultate waarborg nie, en vra of hulle besonderhede oor die toepaslike selfdoenleiding wil hê."
+        }[selectedLanguage];
+        addHistory("user",prompt);
+      }
+    }
     const pending=add("Thinking…","assistant");
     try{
-      const res=await fetch("/api/assistant",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({messages:history.slice(-10),analyticsConsent:riConsent,sessionId:riSession,language:selectedLanguage})});
+      const res=await fetch("/api/assistant",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({messages:history.slice(-14),analyticsConsent:riConsent,sessionId:riSession,language:selectedLanguage})});
       const data=await res.json();if(data.reply)renderAssistant(pending,data.reply);else pending.textContent=data.error||"Sorry, I could not respond. Please contact WhatsApp support.";
-      if(data.reply)history.push({role:"assistant",content:data.reply});
+      if(data.reply)addHistory("assistant",data.reply);
       requestAnimationFrame(()=>{log.scrollTop=log.scrollHeight;});
     }catch(e){pending.textContent="The assistant is temporarily unavailable. Please contact WhatsApp support at 075 793 1848.";requestAnimationFrame(()=>{log.scrollTop=log.scrollHeight;});}
     finally{input.disabled=false;root.querySelector(".ri-send").disabled=false;input.focus();}
