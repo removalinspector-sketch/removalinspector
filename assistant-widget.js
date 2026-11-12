@@ -27,11 +27,13 @@
   .ri-whatsapp-action{display:inline-flex;align-items:center;justify-content:center;gap:9px;margin-top:10px;padding:13px 18px;min-height:46px;border-radius:10px;background:#20c997;color:#06251f!important;font-size:14px;font-weight:800;text-decoration:none!important;box-shadow:0 5px 18px #0003}
   .ri-whatsapp-action:hover{filter:brightness(1.06)}
   .ri-whatsapp-action svg{width:19px;height:19px;fill:currentColor;flex:none}
-  .ri-page{max-width:900px;margin:40px auto;padding:0 18px}
-  .ri-page .ri-shell{position:relative;right:auto;bottom:auto;width:100%;height:calc(100dvh - 170px);min-height:0;max-height:none;display:flex;margin-top:18px;overflow:hidden}
-  .ri-page .ri-log{flex:1 1 0;min-height:0;overscroll-behavior:contain;scroll-behavior:smooth}
+  .ri-page{max-width:900px;margin:24px auto;padding:0 18px;min-height:0}
+  .ri-page .ri-shell{position:relative;right:auto;bottom:auto;width:100%;height:calc(100dvh - 190px);min-height:280px;max-height:none;display:flex;flex:0 0 auto;margin-top:18px;overflow:hidden}
+  .ri-page .ri-log{flex:1 1 0%;height:0;min-height:0;overflow-y:scroll;overflow-x:hidden;overscroll-behavior-y:contain;touch-action:pan-y;scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
   .ri-page .ri-form,.ri-page .ri-links,.ri-page .ri-quick,.ri-page .ri-disclaimer,.ri-page .ri-head,.ri-page #ri-assistant-root>div,.ri-page .ri-shell>div:last-child{flex:0 0 auto;min-height:0}
-  .ri-shell .ri-msg{white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal;max-width:96%;font-size:16px;line-height:1.6}
+  .ri-shell .ri-msg{white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal;max-width:96%;font-size:16px;line-height:1.65;color:#172b22}
+  .ri-shell .ri-log{scrollbar-width:thin;scrollbar-color:#5b7898 #101c31}
+  .ri-shell .ri-log:focus{outline:2px solid #20c997;outline-offset:-2px}
   .ri-shell .ri-form textarea{min-width:0;width:100%;min-height:44px;max-height:120px;line-height:1.4;overflow-y:auto}
   .ri-shell .ri-send{min-height:44px;flex:0 0 auto}
   .ri-page .ri-launch{display:none}
@@ -43,8 +45,8 @@
     .ri-shell{right:10px;bottom:76px;width:calc(100vw - 20px);height:calc(100dvh - 90px);max-height:calc(100dvh - 90px);border-radius:16px}
     .ri-launch{right:12px;bottom:12px}
     .ri-page{margin:12px auto;padding:0 10px}
-    .ri-page .ri-shell{height:calc(100dvh - 145px);min-height:0;max-height:none;margin-top:12px}
-    .ri-page .ri-log{padding:12px;min-height:0}
+    .ri-page .ri-shell{height:calc(100dvh - 165px);min-height:260px;max-height:none;margin-top:12px}
+    .ri-page .ri-log{padding:12px;min-height:0;height:0;overflow-y:scroll;touch-action:pan-y}
     .ri-page .ri-head{padding:12px}
     .ri-page .ri-disclaimer{padding:7px 10px}
     .ri-page .ri-quick{padding:0 10px 8px}
