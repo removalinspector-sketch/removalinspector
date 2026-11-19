@@ -61,6 +61,49 @@
     .ri-disclaimer{max-height:54px;overflow:auto}
   }
   `;
+
+  /* High-contrast readability and reliable mobile chat layout. */
+  css += `
+  #ri-assistant-root{color:#f7fbff!important;font-size:16px!important}
+  #ri-assistant-root .ri-shell{display:flex;flex-direction:column;min-height:0;min-width:0}
+  #ri-assistant-root .ri-shell .ri-head{flex:0 0 auto;background:#102642!important;color:#fff!important}
+  #ri-assistant-root .ri-shell .ri-head strong{color:#fff!important;font-size:17px!important}
+  #ri-assistant-root .ri-shell .ri-head small,
+  #ri-assistant-root .ri-shell .ri-head label{color:#e2edf9!important}
+  #ri-assistant-root .ri-shell .ri-disclaimer{flex:0 0 auto;color:#f0f5fc!important;background:#14243a!important;font-size:12px!important;line-height:1.5!important}
+  #ri-assistant-root .ri-shell .ri-log{flex:1 1 0!important;min-height:0!important;height:0!important;overflow-y:auto!important;overflow-x:hidden!important;padding:16px!important;gap:14px!important;background:#0b1728!important}
+  #ri-assistant-root .ri-shell .ri-msg{display:block!important;max-width:96%!important;width:fit-content!important;padding:14px 16px!important;font-size:18px!important;font-weight:500!important;line-height:1.65!important;letter-spacing:0!important;white-space:pre-wrap!important;overflow-wrap:anywhere!important;word-break:normal!important;opacity:1!important;visibility:visible!important}
+  #ri-assistant-root .ri-shell .ri-bot{background:#f4f8ff!important;color:#101c2d!important}
+  #ri-assistant-root .ri-shell .ri-user{background:#c9f7dc!important;color:#102a1d!important}
+  #ri-assistant-root .ri-shell .ri-form{flex:0 0 auto!important;background:#10213a!important;padding:12px!important;gap:10px!important}
+  #ri-assistant-root .ri-shell .ri-form textarea{background:#fff!important;color:#111827!important;border:2px solid #8ca4bd!important;font-size:17px!important;line-height:1.5!important;min-height:52px!important}
+  #ri-assistant-root .ri-shell .ri-form textarea::placeholder{color:#4b5563!important;opacity:1!important}
+  #ri-assistant-root .ri-shell .ri-send{background:#25d3a2!important;color:#06251f!important;font-size:16px!important;min-height:52px!important}
+  #ri-assistant-root .ri-shell .ri-quick button{background:#203b5c!important;color:#fff!important;border:1px solid #7794b5!important;font-size:13px!important}
+  #ri-assistant-root .ri-shell .ri-links{flex:0 0 auto!important;color:#fff!important}
+  #ri-assistant-root .ri-shell .ri-links a{color:#83f0d1!important;font-size:13px!important}
+  #ri-assistant-root .ri-shell>div[style*="max-height"]{flex:0 0 auto!important;background:#14243a!important;color:#f0f5fc!important;font-size:12px!important;line-height:1.45!important}
+  #ri-assistant-root .ri-shell>div[style*="max-height"] a{color:#83f0d1!important}
+  #ri-assistant-root .ri-shell button:focus-visible,
+  #ri-assistant-root .ri-shell textarea:focus-visible,
+  #ri-assistant-root .ri-shell select:focus-visible{outline:3px solid #ffd166!important;outline-offset:2px!important}
+  @media(max-width:520px){
+    #ri-assistant-root.ri-page{padding:0 8px!important;margin:10px auto!important}
+    #ri-assistant-root .ri-page-title h1{font-size:27px!important}
+    #ri-assistant-root .ri-shell{height:calc(100dvh - 145px)!important;min-height:360px!important;max-height:none!important;margin-top:10px!important}
+    #ri-assistant-root .ri-shell .ri-log{padding:12px!important;min-height:0!important}
+    #ri-assistant-root .ri-shell .ri-msg{font-size:17px!important;line-height:1.6!important;padding:13px 14px!important}
+    #ri-assistant-root .ri-shell .ri-disclaimer{font-size:11px!important;padding:7px 10px!important}
+    #ri-assistant-root .ri-shell .ri-form{padding:9px!important}
+    #ri-assistant-root .ri-shell .ri-form textarea{font-size:17px!important}
+  }
+  @media(max-height:650px){
+    #ri-assistant-root .ri-shell .ri-disclaimer{max-height:58px!important;overflow-y:auto!important}
+    #ri-assistant-root .ri-shell .ri-log{min-height:0!important}
+    #ri-assistant-root .ri-shell .ri-form{padding:7px!important}
+  }
+  `;
+
   const style=document.createElement("style");style.textContent=css;document.head.appendChild(style);
   if(isPage) root.classList.add("ri-page");
   root.innerHTML = `
