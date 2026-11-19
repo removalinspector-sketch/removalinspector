@@ -131,12 +131,12 @@
     el.appendChild(document.createElement("br"));el.appendChild(button);
     requestAnimationFrame(()=>{log.scrollTop=log.scrollHeight;});
   }
-  // Four-by-four consultative intake: problem, motivation, previous attempts, consequences.
-  // The opening welcome asks about the problem; each subsequent turn asks one question.
+  // Four-by-four consultative intake: after the opening problem, ask WHY NOW,
+  // CONSEQUENCE, PREVIOUS ATTEMPTS and DECISION-MAKER, one question per turn.
   const intakeQuestions = {
-    en: ["What made you look into this now?","What have you already tried — for example, contacting the creditor, debt counsellor or credit bureau?","If this remains unresolved, what is the main difficulty it causes for you?"],
-    zu: ["Yini ekwenze wafuna ukulungisa le ndaba manje?","Yini osuke wayizama kuze kube manje — njengokuxhumana nomkweletisi, umeluleki wezikweletu noma i-credit bureau?","Uma le nkinga ingalungiseki, ikuphi ubunzima obukhulu ekudalela bona?"],
-    af: ["Wat het jou laat besluit om dit nou aan te spreek?","Wat het jy reeds probeer — byvoorbeeld om die krediteur, skuldberader of kredietburo te kontak?","As dit nie opgelos word nie, wat is die grootste probleem wat dit vir jou veroorsaak?"]
+    en: ["What made you look into this now?","If this remains unresolved, how could it affect you?","What have you already tried, and what happened?","Are you making this decision yourself, or does someone else need to be involved?"],
+    zu: ["Yini ekwenze wafuna ukulungisa le ndaba manje?","Uma kungashintshi lutho, lokho kungakuphazamisa kanjani?","Usuzamile ukwenzani kuze kube manje, futhi kwenzekeni?","Ingabe nguwe ozothatha isinqumo, noma kukhona omunye okudingeka axoxisane nawe?"],
+    af: ["Wat het jou nou laat besluit om dit aan te spreek?","As niks verander nie, hoe kan dit jou raak?","Wat het jy tot dusver probeer, en wat was die uitkoms?","Neem jy self die besluit, of moet iemand anders ook daaroor saam besluit?"]
   };
   let intakeStep = 0;
   let intakeStarted = false;
@@ -152,18 +152,14 @@
       addHistory("assistant",question);add(question,"assistant");intakeStep=1;
       input.disabled=false;root.querySelector(".ri-send").disabled=false;input.focus();return;
     }
-    if(intakeStep<3){
+    if(intakeStep<4){
       const question=intakeQuestions[selectedLanguage][intakeStep];
       addHistory("assistant",question);add(question,"assistant");intakeStep++;
       input.disabled=false;root.querySelector(".ri-send").disabled=false;input.focus();return;
     }
-    // Four answers collected. Now reflect, diagnose and ask permission before any offer.
-    const instruction={
-      en:"The customer has answered the four-by-four diagnostic questions: (1) their problem, (2) why they are addressing it now, (3) what they have already tried, and (4) the consequence if it remains unresolved. Do not ask more diagnostic questions. Briefly reflect their situation accurately, identify any missing information without guessing, explain the most relevant educational next step, clearly state what they must do themselves, make no guarantees, and ask permission before explaining a relevant DIY kit or service. Do not pressure them.",
-      zu:"Ikhasimende seliphendule imibuzo emine yokuxilonga: (1) inkinga yalo, (2) ukuthi kungani liyilungisa manje, (3) elikuzamile, kanye (4) nomphumela uma ingaxazululeki. Ungabuzi eminye imibuzo yokuxilonga. Fingqa isimo salo ngokunembile, ungacabangi ngolwazi olungekho, chaza isinyathelo solwazi esifanele, cacisa ukuthi yini okufanele liyenze ngokwalo, ungathembisi miphumela, bese ucela imvume ngaphambi kokuchaza ikhithi ye-DIY noma isevisi efanele. Ungalifaki ingcindezi.",
-      af:"Die kliënt het die vier diagnostiese vrae beantwoord: (1) die probleem, (2) waarom hulle dit nou aanspreek, (3) wat hulle reeds probeer het, en (4) die gevolg indien dit onopgelos bly. Moenie verdere diagnostiese vrae vra nie. Som hul situasie akkuraat op, moenie ontbrekende feite raai nie, verduidelik die toepaslike opvoedkundige volgende stap, stel duidelik wat hulle self moet doen, waarborg geen resultate nie, en vra toestemming voordat jy 'n toepaslike selfdoenstel of diens verduidelik. Moenie druk uitoefen nie."
-    }[selectedLanguage];
-    addHistory("user",instruction);
+    // The visitor has now answered the opening problem plus all four discovery
+    // questions. Send the actual conversation; the Worker system prompt handles
+    // the summary, next step and permission-based product explanation.
     const pending=add("Thinking…","assistant");
     try{
       const res=await fetch("/api/assistant",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({messages:history.slice(-14),analyticsConsent:riConsent,sessionId:riSession,language:selectedLanguage})});
