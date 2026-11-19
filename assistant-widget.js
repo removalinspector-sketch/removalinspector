@@ -148,6 +148,10 @@
     if(!intakeStarted){
       // Customer's first answer is Question 1: the problem.
       intakeStarted=true;
+      // Quick-start prompts are only for the opening issue; hide them once
+      // the guided four-question discovery flow begins to prevent accidental
+      // extra answers being inserted mid-assessment.
+      root.querySelector(".ri-quick").hidden=true;
       const question=intakeQuestions[selectedLanguage][0];
       addHistory("assistant",question);add(question,"assistant");intakeStep=1;
       input.disabled=false;root.querySelector(".ri-send").disabled=false;input.focus();return;
