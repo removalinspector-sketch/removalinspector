@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Free Financial Calculators South Africa | Removal Inspector</title>
+<meta name="description" content="Use free South African budget, debt repayment, loan affordability and interest calculators. Private, browser-based estimates with no registration.">
+<link rel="canonical" href="https://removalinspector.co.za/free-tools/">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0B0F1E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0B0F1E;--panel:#141A30;--panel2:#1A2140;--text:#E8EDF7;--muted:#A1ABC5;--green:#00E38A;--blue:#5AA9FF;--line:rgba(138,148,181,.2);--font:'Sora',system-ui,sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 var(--font)}a{color:var(--blue)}.wrap{max-width:1120px;margin:auto;padding:0 22px}
+header{border-bottom:1px solid var(--line);background:#0d1223}.nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{font-weight:800;letter-spacing:.05em;color:var(--green);text-decoration:none}.links{display:flex;gap:20px;flex-wrap:wrap}.links a{text-decoration:none;color:var(--muted);font-size:13px}.links a:hover{color:var(--green)}
+.hero{padding:56px 0 30px}.eyebrow{color:var(--green);font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700}.hero h1{font-size:clamp(32px,5vw,48px);line-height:1.12;margin:12px 0}.hero p{max-width:760px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:20px 0 60px}.card{background:linear-gradient(145deg,var(--panel),#101629);border:1px solid var(--line);border-radius:18px;padding:24px;min-width:0}.card h2{font-size:20px;margin:0 0 6px}.card>p{color:var(--muted);font-size:13px;margin:0 0 18px}
+label{display:block;font-size:12px;color:var(--muted);margin:12px 0 5px}input{width:100%;background:#0c1223;border:1px solid var(--line);border-radius:9px;padding:12px;color:var(--text);font:inherit;font-size:15px}input:focus{outline:2px solid var(--blue);outline-offset:1px}
+button{margin-top:16px;border:0;border-radius:9px;padding:12px 17px;background:var(--green);color:#04140c;font:700 13px var(--font);cursor:pointer}.result{margin-top:16px;padding:14px;border:1px solid rgba(0,227,138,.35);background:rgba(0,227,138,.08);border-radius:10px;min-height:50px;color:var(--text);font-size:13px}.result strong{color:var(--green);font-size:19px;display:block;margin-bottom:3px}.note{font-size:11px;color:#8490ad;margin-top:12px}.wide{grid-column:1/-1}.intro{padding:0 0 15px;color:var(--muted);font-size:13px}.faq{padding:0 0 60px}.faq h2{font-size:23px}.faq p{color:var(--muted);max-width:850px;font-size:13px}footer{border-top:1px solid var(--line);padding:26px 0;color:#8490ad;font-size:12px}
+@media(max-width:700px){.nav{height:auto;min-height:66px;align-items:flex-start;padding-top:18px;padding-bottom:14px;flex-direction:column}.grid{grid-template-columns:1fr}.wide{grid-column:auto}.links{gap:12px}.hero{padding-top:38px}}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Free Financial Calculators South Africa","url":"https://removalinspector.co.za/free-tools/","description":"Free browser-based budget, debt repayment, affordability and interest calculators."}</script>
+</head>
+<body>
+<header><div class="wrap nav"><a class="brand" href="/">REMOVAL INSPECTOR</a><nav class="links" aria-label="Main navigation"><a href="/">Home</a><a href="/learn/">Credit Guides</a><a href="/free-credit-profile-checker/">Free Checker</a><a href="/assistant/">Assistant</a></nav></div></header>
+<main class="wrap">
+<section class="hero"><span class="eyebrow">Free tools · No sign-up · South Africa</span><h1>Free financial calculators</h1><p>Estimate a monthly budget, debt repayment timeline, simple interest or an illustrative instalment. Enter amounts in rand (R). Calculations happen in your browser; values are not sent to Removal Inspector.</p></section>
+<p class="intro">These calculators provide estimates for planning and education. They are not credit offers, affordability assessments by a lender, debt counselling, tax advice or a guarantee of approval. Actual charges and repayment terms depend on your agreement and provider.</p>
+<section class="grid" aria-label="Financial calculators">
+<article class="card"><h2>Monthly budget planner</h2><p>See what remains after your monthly income and expenses.</p>
+<label for="income">Monthly take-home income (R)</label><input id="income" type="number" min="0" step="0.01" placeholder="e.g. 15000">
+<label for="expenses">Total monthly expenses (R)</label><input id="expenses" type="number" min="0" step="0.01" placeholder="e.g. 11200">
+<button type="button" onclick="budget()">Calculate balance</button><div class="result" id="budgetResult" aria-live="polite">Your monthly balance will appear here.</div></article>
+<article class="card"><h2>Debt repayment estimator</h2><p>Estimate the months needed to repay a balance with a fixed monthly payment and monthly interest.</p>
+<label for="balance">Outstanding balance (R)</label><input id="balance" type="number" min="0" step="0.01" placeholder="e.g. 12000">
+<label for="payment">Monthly payment (R)</label><input id="payment" type="number" min="0" step="0.01" placeholder="e.g. 1200">
+<label for="rate">Annual interest rate (%)</label><input id="rate" type="number" min="0" max="1000" step="0.01" placeholder="e.g. 18">
+<button type="button" onclick="repay()">Estimate repayment time</button><div class="result" id="repayResult" aria-live="polite">Your estimate will appear here.</div><p class="note">Assumes interest is applied monthly and the same payment is made each month. Fees, rate changes and missed payments are excluded.</p></article>
+<article class="card"><h2>Loan instalment estimator</h2><p>Estimate a level monthly instalment for a loan amount and term.</p>
+<label for="loan">Amount borrowed (R)</label><input id="loan" type="number" min="0" step="0.01" placeholder="e.g. 50000">
+<label for="loanRate">Annual interest rate (%)</label><input id="loanRate" type="number" min="0" max="1000" step="0.01" placeholder="e.g. 15">
+<label for="months">Repayment term (months)</label><input id="months" type="number" min="1" max="600" step="1" placeholder="e.g. 48">
+<button type="button" onclick="instalment()">Estimate instalment</button><div class="result" id="loanResult" aria-live="polite">Your estimate will appear here.</div><p class="note">Excludes initiation, service, insurance and other charges. A lender's actual quote may differ.</p></article>
+<article class="card"><h2>Simple interest calculator</h2><p>Calculate illustrative simple interest on an amount over time.</p>
+<label for="principal">Starting amount (R)</label><input id="principal" type="number" min="0" step="0.01" placeholder="e.g. 10000">
+<label for="simpleRate">Annual interest rate (%)</label><input id="simpleRate" type="number" min="0" max="1000" step="0.01" placeholder="e.g. 10">
+<label for="years">Time (years)</label><input id="years" type="number" min="0" step="0.1" placeholder="e.g. 2">
+<button type="button" onclick="simple()">Calculate interest</button><div class="result" id="simpleResult" aria-live="polite">Your calculation will appear here.</div><p class="note">Uses simple interest only: principal × annual rate × time. It does not model compounding or contractual fees.</p></article>
+</section>
+<section class="faq"><h2>How to use these estimates responsibly</h2><p>Use the results as a starting point for your own planning, then compare them with your statements and the written terms from your lender or service provider. Do not share account numbers, identity numbers, passwords or banking credentials with anyone claiming they can improve a credit profile.</p><p>Removal Inspector provides general financial and credit-profile education. It is not a registered debt counsellor, lender, credit bureau or law firm, and does not make lending decisions or guarantee a credit outcome. For debt-review advice, contact your registered debt counsellor. For a credit-report dispute, follow the relevant bureau's official process.</p><p><a href="/learn/">Explore the free credit education library</a> · <a href="/free-credit-profile-checker/">Use the free guided credit-profile checker</a> · <a href="/privacy-policy/">Privacy policy</a></p></section>
+</main>
+<footer><div class="wrap">© 2026 Removal Inspector · South Africa · Educational information only.</div></footer>
+<script>
+function val(id){return Number(document.getElementById(id).value)}
+function money(n){return new Intl.NumberFormat('en-ZA',{style:'currency',currency:'ZAR',maximumFractionDigits:2}).format(n)}
+function show(id,html){document.getElementById(id).innerHTML=html}
+function budget(){const i=val('income'),e=val('expenses');if(!Number.isFinite(i)||!Number.isFinite(e)||i<=0||e<0){show('budgetResult','Enter a monthly income above zero and expenses of zero or more.');return}const b=i-e;show('budgetResult','<strong>'+money(b)+'</strong>'+(b>=0?'Estimated amount remaining each month.':'Your expenses exceed income by this amount each month.'))}
+function repay(){const b=val('balance'),p=val('payment'),r=val('rate')/1200;if(b<=0||p<=0||r<0||!Number.isFinite(b+p+r)){show('repayResult','Enter a balance and payment above zero, plus a valid annual rate.');return}if(r===0){show('repayResult','<strong>'+Math.ceil(b/p)+' months</strong>Estimated time, excluding fees.');return}if(p<=b*r){show('repayResult','The payment does not exceed the estimated first month’s interest. Increase the payment or check the rate.');return}const n=Math.log(p/(p-b*r))/Math.log(1+r);if(!Number.isFinite(n)||n>1200){show('repayResult','The repayment period is outside this estimator’s supported range.');return}show('repayResult','<strong>'+Math.ceil(n)+' months</strong>Approximately '+(Math.ceil(n)/12).toFixed(1)+' years, excluding fees and rate changes.')}
+function instalment(){const a=val('loan'),annual=val('loanRate'),n=val('months),r=annual/1200;if(a<=0||n<1||!Number.isInteger(n)||annual<0||!Number.isFinite(a+annual+n)){show('loanResult','Enter a loan amount above zero, a non-negative rate and a whole number of months.');return}const p=r===0?a/n:a*r/(1-Math.pow(1+r,-n));show('loanResult','<strong>'+money(p)+'</strong>Illustrative monthly instalment over '+n+' months; total payments about '+money(p*n)+'.')}
+function simple(){const p=val('principal'),r=val('simpleRate')/100,t=val('years');if(p<=0||r<0||t<0||!Number.isFinite(p+r+t)){show('simpleResult','Enter a starting amount above zero, and valid non-negative rate and time.');return}const interest=p*r*t;show('simpleResult','<strong>'+money(interest)+'</strong>Interest; estimated total '+money(p+interest)+'.')}
+</script>
+</body></html>
